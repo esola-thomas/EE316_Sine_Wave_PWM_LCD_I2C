@@ -16,5 +16,3 @@ Design and implement a Pulse Wave Modulator (PWM) to generate sinusoidal wavefor
         - 7-segment display wire
 
 # Resources
-
-
