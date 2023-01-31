@@ -11,6 +11,7 @@ rtl_work
 _*
 @_*
 *.sdo
+*.qws
 
 # Ignore multiple files
 *_ignore
