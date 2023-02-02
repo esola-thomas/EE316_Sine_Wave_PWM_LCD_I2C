@@ -10,13 +10,11 @@ port(
     R_W         : in std_logic; -- Read when HIGH, Write when LOW
     clk         : in std_logic;
     clk_en      : in std_logic; -- clk enable from counter this triggers change form idle
-	 init 		 : in std_logic;
-	 PR_Mode		 : in std_logic;
+
     -- Memory outputs
     SRAM_data   : inout std_logic_vector(15 downto 0); -- Bus to SRAM IC
     oMemAdress  : out std_logic_Vector(19 downto 0);
     oCE, oUB, oLB, oWE, oOE : out std_logic;
-    display_mem : out std_logic_vector(7 downto 0)
     );
 end SRAM_Controller;
 
@@ -25,11 +23,6 @@ architecture arch of SRAM_Controller is
     signal birData_in   : std_logic := '1'; -- Tristate buff is input when 1
     signal count        : std_logic := '0'; -- Count when '1'
     signal counter_delay: std_logic_vector(27 downto 0) := (others => '0'); -- Counter for delay hold delay of data to SRAM
-    signal iMemAdress_reg : std_logic_vector(19 downto 0) := (others => '0');
-    signal iMemAdress_reg2 : std_logic_vector(19 downto 0) := (others => '0');
-	 signal init_reg : std_logic := '1';
-	 signal PR_Mode_reg : std_logic := '0';
-    -- Memory State Machine
 
     -- Read SRAM reg
     signal read_delay : std_logic := '0';
@@ -41,13 +34,12 @@ architecture arch of SRAM_Controller is
         mem_write_end
     );
 
-    signal mem_state : mem_operation := mem_idle;
+    signal mem_state : mem_operation := mem_idle;   -- mem_state is initialized to idle
 
 begin
-
     read_write_counter : process (clk) begin 
         if (rising_edge(clk)) then
-            if (count = '1') then -- Count up
+            if (count = '1') then -- count is only one while a process is running (read/wirite)
                 counter_delay <= counter_delay + '1';
             else 
                 counter_delay <= (others => '0');
@@ -57,7 +49,6 @@ begin
     
     mem_state_machine : process (clk) begin
         if (rising_edge(clk)) then
-				
             case mem_state is
                 when mem_read => 
                     if(read_delay = '1') then
@@ -74,7 +65,7 @@ begin
                     oWE <= '0';
                     oOE <= '1';
                     read_delay <= '0';
-						  Data_reg <= iData;
+					Data_reg <= iData;
                     mem_state <= mem_write_end;
                     
                 when mem_write_end =>
@@ -82,48 +73,36 @@ begin
                     oWE <= '1';
                     oOE <= '1';
                     birData_in <= '0';
-						  mem_state <= mem_idle;
+					mem_state <= mem_idle;
 						  
                 when mem_idle =>
-                    if ((clk_en = '1' and R_W = '1') or (init_reg = '1' and init = '0') or (PR_Mode_reg = '1' and PR_Mode = '0')) then
+                    if (clk_en = '1' and R_W = '1') then
                         mem_state <= mem_read;
                         birData_in <= '1'; -- Reading from SRAM so data acts as input
                         oWE <= '1';
                         oOE <= '0';
                         read_delay <= '1';
-                    elsif (clk_en = '1' and R_W = '0') then      -- WRITE STATE
+                    elsif (clk_en = '1' and R_W = '0') then -- WRITE STATE
                         mem_state <= mem_write;
                         read_delay <= '1';
                         birData_in <= '0'; -- Writing to SRAM so data acts as output
                         Data_reg <= iData; -- Write data to SRAM
                     else                        -- Stay in idle state
-								mem_state <= mem_idle;
+						mem_state <= mem_idle;
                         Data_reg <= Data_reg;
-                        birData_in <= '0'; -- Output the current Data_reg value
+                        birData_in <= '1'; -- Go to High Impedance mode on idle
                         oWE <= '1';
                         oOE <= '1'; 
-								-- ########Register Memory input or output. If it changes read SRAM to update Data_reg########## Or Read memory after counter is restarted
                     end if;
             end case;
-				PR_Mode_reg <= PR_Mode;
-				init_reg <= init;
         end if;
     end process mem_state_machine;
 
-    process (clk_en) begin 
-        if (rising_edge(clk_en)) then
-            iMemAdress_reg <= iMemAdress;
-            iMemAdress_reg2 <= iMemAdress_reg;
-        end if;
-    end process;
-
-    oMemAdress <= iMemAdress_reg when init = '1' else
-						iMemAdress;
-						
-    display_mem <= iMemAdress_reg (7 downto 0)when init = '1' else
-						 iMemAdress (7 downto 0);
+    oMemAdress <= iMemAdress;
+	
     -- Tristate buffer configuration, when birData_in = 1 the port acts as input
     SRAM_data <= (others => 'Z') when (birData_in = '1') else Data_reg;
+
     -- For Current requirements this outputs can be set low
     oCE <= '0';
     oUB <= '0';
