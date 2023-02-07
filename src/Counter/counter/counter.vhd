@@ -13,6 +13,7 @@ entity counter is
 		clk 		: in std_logic; 
 		ireset		: in std_logic;
 		direction 	: in std_logic; -- 1 Counts up, 0 counts down
+		carry_in	: in std_logic;
 		carry_out	: out std_logic := '0'; -- Works for both counting up and conting down
 		count_out 	: out std_logic_vector (count_size-1 downto 0) := (others => '0')
 	);
@@ -20,6 +21,7 @@ end counter;
 
 architecture arch of counter is
 
+	signal new_carry_in : std_logic := '0'; -- When carry data was read
 	signal en : std_logic := '0';
 	signal clk_en_count : integer := 0;
 	signal count_int_reg: integer := 0;
@@ -42,10 +44,18 @@ begin
 		if (ireset = '1') then -- Possible implementation, add if statement to reset to max or min value depending on the direction signal
 			count_int_reg <= 0;
 			carry_out <= '0';
+		elsif (carry_in = '1' and new_carry_in = '0') then
+			new_carry_in <= '1';
+			if (direction = '1') then
+				count_int_reg <= count_int_reg + 1;
+			elsif (direction = '0') then
+				count_int_reg <= count_int_reg - 1;
+			end if;
 		elsif (rising_edge(clk) and en = '1') then
+			new_carry_in <= '0';
 			if (direction = '1') then -- Count up
-				if (count_int_reg + count_step_size > max_count) then
-					count_int_reg <= count_int_reg + count_step_size - max_count-1;
+				if (count_int_reg + count_step_size >= max_count) then
+					count_int_reg <= count_int_reg + count_step_size - max_count;
 					carry_out <= '1';
 				elsif (count_int_reg + count_step_size <= max_count) then
 					count_int_reg <= count_int_reg + count_step_size;
@@ -54,7 +64,7 @@ begin
 
 			elsif (direction = '0') then -- Count down
 				if (count_int_reg - count_step_size < 0) then 
-					count_int_reg <= count_int_reg - count_step_size + max_count+1;
+					count_int_reg <= count_int_reg - count_step_size + max_count;
 					carry_out <= '1';
 				elsif (count_int_reg - count_step_size >= 0) then
 					count_int_reg <= count_int_reg - count_step_size;

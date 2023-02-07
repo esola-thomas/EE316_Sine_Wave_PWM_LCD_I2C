@@ -1,71 +1,74 @@
--- library IEEE;
--- USE ieee.std_logic_1164.all;
--- use IEEE.NUMERIC_STD.ALL;
+library IEEE;
+USE ieee.std_logic_1164.all;
+use IEEE.NUMERIC_STD.ALL;
 
--- entity decimal_counter is
+entity decimal_counter is
+	generic(
+		count_step_integer 	: integer := 1; 	-- Whole part of delay 
+		count_step_decimal 	: integer := 25;    -- Delay part of delay (.25) <= Based on size
+		count_max_integer 	: integer := 10;
+		count_max_decimal	: integer := 100;
+        bus_size_integer    : integer := 4;
+        bus_size_decimal    : integer := 8;
+        count_delay         : integer := 3      -- Delay in clock cycles (delay do count up/down)
+	);
+    port(
+		clk 	    : in std_logic; 
+		ireset	    : in std_logic; -- Active high
+        direction   : in std_logic;
+        i,d         : out integer
+	);
+end decimal_counter;
 
--- 	port(
--- 		clk 	: in std_logic; 
--- 		ireset	: in std_logic -- Active high
--- 	);
--- 	generic(
--- 		count_rate_whole 	: integer := 0; 	-- Whole part of delay 
--- 		count_rate_decimal 	: integer := 5;		-- Delay part of delay
--- 		count_max_whole 	: integer := 10;
--- 		count_max_decimal	: integer := 5;
--- 	);
--- end decimal_counter;
+architecture arch of decimal_counter is 
 
--- -- signal input_1   : integer;
--- -- signal output_1a : std_logic_vector(3 downto 0);
--- -- signal output_1b : std_logic_vector(3 downto 0);
-   
--- -- -- This line demonstrates how to convert positive integers
--- -- output_1a <= std_logic_vector(to_unsigned(input_1, output_1a'length));
- 
--- -- -- This line demonstrates how to convert positive or negative integers
--- -- output_1b <= std_logic_vector(to_signed(input_1, output_1b'length));
+	component counter
+    generic(
+        count_size 			: integer; -- Output bus size
+        max_count			: integer;
+        count_step_size 	: integer;
+        count_delay			: integer
+    );
+    port(
+        clk 		: in std_logic; 
+        ireset		: in std_logic;
+        direction 	: in std_logic; -- 1 Counts up, 0 counts down
+        carry_in	: in std_logic;
+        carry_out	: out std_logic; -- Works for both counting up and conting down
+        count_out 	: out std_logic_vector (count_size-1 downto 0)
+    );
+end component;
 
--- architecture arch of decimal_counter is 
+    signal en : std_logic := '0'; -- enable signal from clock enabler
 
--- 	signal int : integer := 0;
--- 	signal deci: integer := 0;
--- 	signal decimal_count : std_logic_vector(19 downto 0) := (others => '0'); -- Whole part is (19 down to 10) / Decimal part is (9 down to 0)
-	
--- 	signal clk_en_signal : std_logic := '0';
--- 	component clk_en is
--- 		generic(
--- 			delay : integer := 49999999);
--- 		port(
--- 			clk 	: in std_logic;
--- 			en		: out std_logic := '0');
--- 	end component;
+    -- Signals for integer counter (int)
+    signal int_carry_out   : std_logic := '0';
+    signal int_count_out   : std_logic_vector (bus_size_integer-1 downto 0);
+    
+    -- Signals for decimal counter (deci)
+    signal deci_carry_out   : std_logic := '0';
+    signal deci_count_out   : std_logic_vector (bus_size_decimal-1 downto 0);
 
--- begin
+    -- Signals for combined counter
+    signal int_reg, deci_reg : integer := 0;
 
--- 	enabler : clk_en
--- 		generic map (delay => 49999999);
--- 		port map (clk => clk, en => clk_en_signal);
+begin
 
--- 	count : process(clk, clk_en_signal, ireset) is begin
+    int_counter : counter generic map (count_size => bus_size_integer, max_count => count_max_integer, count_step_size => count_step_integer, count_delay => count_delay)
+    port map (clk => clk, ireset => ireset, direction => direction, carry_in => deci_carry_out,count_out => int_count_out, carry_out => int_carry_out);
 
--- 		if (ireset = '1') then
--- 			int = 0;
--- 			deco = 0;
--- 		elsif(rising_edge(clk_en_signal)) then
--- 			-- Counted up to the limit
--- 			if (int = count_max_whole and deci = count_max_decimal) then
--- 				-- Reset counter to 0
--- 			elsif (int < count_rate_whole) then 
--- 				-- Add to decimal part if 
+    deci_counter : counter generic map (count_size => bus_size_decimal, max_count => count_max_decimal, count_step_size => count_step_decimal, count_delay => count_delay)
+    port map (clk => clk, ireset => ireset, direction => direction, carry_in => '0',count_out => deci_count_out, carry_out => deci_carry_out);
 
--- 				-- Verify not over limit
-
--- 				-- Add to integer
-
--- 				-- Verify not over limit
--- 			end if;
--- 		end if;
--- 	end process count;
-
--- end arch;
+	combine_counters : process(clk, ireset) is begin
+        if (ireset = '1') then
+            int_reg <= 0;
+            deci_reg <= 0;
+        else 
+            int_reg <= to_integer(unsigned(int_count_out));
+            deci_reg <= to_integer(unsigned(deci_count_out));
+        end if;
+	end process combine_counters;
+    i <=  int_reg;
+    d <= deci_reg;
+end arch;
