@@ -1,5 +1,6 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.NUMERIC_STD.all;
 use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity system_state is
@@ -10,7 +11,7 @@ port(
 	PWM_en 		: out std_logic;
 	clk_en 		: out std_logic;
 	o_global_reset : out std_logic;
-	o_state_message : out std_logic_vector (31 downto 0) 
+	o_state_message : out std_logic_vector (127 downto 0) 
 	);
 end system_state;
 
@@ -117,5 +118,20 @@ begin
 		end if;
 	end process clk_enabler;
 	clk_en <= en;
-	o_state_message <= state_message;
+	o_state_message (127 downto 120) <= std_logic_vector(to_unsigned(character'pos(state_message(1)), 8));
+	o_state_message (119 downto 112) <= std_logic_vector(to_unsigned(character'pos(state_message(2)), 8));
+	o_state_message (111 downto 104) <= std_logic_vector(to_unsigned(character'pos(state_message(3)), 8));
+	o_state_message (103 downto 96) <= std_logic_vector(to_unsigned(character'pos(state_message(4)), 8));
+	o_state_message (95 downto 88) <= std_logic_vector(to_unsigned(character'pos(state_message(5)), 8));
+	o_state_message (87 downto 80) <= std_logic_vector(to_unsigned(character'pos(state_message(6)), 8));
+	o_state_message (79 downto 72) <= std_logic_vector(to_unsigned(character'pos(state_message(7)), 8));
+	o_state_message (71 downto 64) <= std_logic_vector(to_unsigned(character'pos(state_message(8)), 8));
+	o_state_message (63 downto 56) <= std_logic_vector(to_unsigned(character'pos(state_message(9)), 8));
+	o_state_message (55 downto 48) <= std_logic_vector(to_unsigned(character'pos(state_message(10)), 8));
+	o_state_message (47 downto 40) <= std_logic_vector(to_unsigned(character'pos(state_message(11)), 8));
+	o_state_message (39 downto 32) <= std_logic_vector(to_unsigned(character'pos(state_message(12)), 8));
+	o_state_message (31 downto 24) <= std_logic_vector(to_unsigned(character'pos(state_message(13)), 8));
+	o_state_message (23 downto 16) <= std_logic_vector(to_unsigned(character'pos(state_message(14)), 8));
+	o_state_message (15 downto 8) <= std_logic_vector(to_unsigned(character'pos(state_message(15)), 8));
+	o_state_message (7 downto 0) <= std_logic_vector(to_unsigned(character'pos(state_message(16)), 8));
 end;

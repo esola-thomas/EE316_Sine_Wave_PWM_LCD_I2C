@@ -115,33 +115,33 @@ process(byteSel)
                   temp_LCD_RS <= '1';
       when 27  => temp_LCD_DATA <= X"31";   -- 2
                   temp_LCD_RS <= '1';
-      when 28  => temp_LCD_DATA <= x"32";   -- 3
+      when 28  => temp_LCD_DATA <= X"32";   -- 3
                   temp_LCD_RS <= '1';
-      when 29  => temp_LCD_DATA <= x"33";   -- 4
+      when 29  => temp_LCD_DATA <= X"33";   -- 4
                   temp_LCD_RS <= '1';
-      when 30  => temp_LCD_DATA <= x"34";   -- 5
+      when 30  => temp_LCD_DATA <= X"34";   -- 5
                   temp_LCD_RS <= '1';
-      when 31  => temp_LCD_DATA <= x"35";   -- 6
+      when 31  => temp_LCD_DATA <= X"35";   -- 6
                   temp_LCD_RS <= '1';
-      when 32  => temp_LCD_DATA <= x"36";   -- 7
+      when 32  => temp_LCD_DATA <= X"36";   -- 7
                   temp_LCD_RS <= '1';
-      when 33  => temp_LCD_DATA <= x"37";   -- 8
+      when 33  => temp_LCD_DATA <= X"37";   -- 8
                   temp_LCD_RS <= '1';
-      when 34  => temp_LCD_DATA <= x"38";   -- 9
+      when 34  => temp_LCD_DATA <= X"38";   -- 9
                   temp_LCD_RS <= '1';
-      when 35  => temp_LCD_DATA <= x"39";   -- 10
+      when 35  => temp_LCD_DATA <= X"39";   -- 10
                   temp_LCD_RS <= '1';
-      when 36  => temp_LCD_DATA <= x"41";   -- 11
+      when 36  => temp_LCD_DATA <= X"41";   -- 11
                   temp_LCD_RS <= '1';
-      when 37  => temp_LCD_DATA <= x"42";   -- 12
+      when 37  => temp_LCD_DATA <= X"42";   -- 12
                   temp_LCD_RS <= '1';
-      when 38  => temp_LCD_DATA <= x"43";   -- 13
+      when 38  => temp_LCD_DATA <= X"43";   -- 13
                   temp_LCD_RS <= '1';
-      when 39  => temp_LCD_DATA <= x"44";   -- 14
+      when 39  => temp_LCD_DATA <= X"44";   -- 14
                   temp_LCD_RS <= '1';
-      when 40  => temp_LCD_DATA <= x"45";   -- 15
+      when 40  => temp_LCD_DATA <= X"45";   -- 15
                   temp_LCD_RS <= '1';
-      when 41  => temp_LCD_DATA <= x"46";   -- 16
+      when 41  => temp_LCD_DATA <= X"46";   -- 16
                   temp_LCD_RS <= '1';
       when others => temp_LCD_DATA <= X"38";
                   temp_LCD_RS <= '0';
