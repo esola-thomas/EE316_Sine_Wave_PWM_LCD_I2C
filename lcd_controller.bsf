@@ -20,8 +20,8 @@ applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 280 128)
-	(text "LCD_user_logic" (rect 5 0 71 12)(font "Arial" ))
+	(rect 16 16 240 128)
+	(text "lcd_controller" (rect 5 0 56 12)(font "Arial" ))
 	(text "inst" (rect 8 96 20 108)(font "Arial" ))
 	(port
 		(pt 0 32)
@@ -33,45 +33,59 @@ applicable agreement for further details.
 	(port
 		(pt 0 48)
 		(input)
-		(text "iReset_n" (rect 0 0 36 12)(font "Arial" ))
-		(text "iReset_n" (rect 21 43 57 55)(font "Arial" ))
+		(text "rst" (rect 0 0 10 12)(font "Arial" ))
+		(text "rst" (rect 21 43 31 55)(font "Arial" ))
 		(line (pt 0 48)(pt 16 48)(line_width 1))
 	)
 	(port
 		(pt 0 64)
 		(input)
-		(text "SDK_message[15..0]" (rect 0 0 86 12)(font "Arial" ))
-		(text "SDK_message[15..0]" (rect 21 59 107 71)(font "Arial" ))
+		(text "line1_buffer[127..0]" (rect 0 0 74 12)(font "Arial" ))
+		(text "line1_buffer[127..0]" (rect 21 59 95 71)(font "Arial" ))
 		(line (pt 0 64)(pt 16 64)(line_width 3))
 	)
 	(port
-		(pt 264 32)
-		(output)
-		(text "LCD_DATA[7..0]" (rect 0 0 75 12)(font "Arial" ))
-		(text "LCD_DATA[7..0]" (rect 168 27 243 39)(font "Arial" ))
-		(line (pt 264 32)(pt 248 32)(line_width 3))
+		(pt 0 80)
+		(input)
+		(text "line2_buffer[127..0]" (rect 0 0 75 12)(font "Arial" ))
+		(text "line2_buffer[127..0]" (rect 21 75 96 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
 	)
 	(port
-		(pt 264 48)
+		(pt 224 32)
 		(output)
-		(text "LCD_EN" (rect 0 0 40 12)(font "Arial" ))
-		(text "LCD_EN" (rect 203 43 243 55)(font "Arial" ))
-		(line (pt 264 48)(pt 248 48)(line_width 1))
+		(text "lcd_e" (rect 0 0 21 12)(font "Arial" ))
+		(text "lcd_e" (rect 182 27 203 39)(font "Arial" ))
+		(line (pt 224 32)(pt 208 32)(line_width 1))
 	)
 	(port
-		(pt 264 64)
+		(pt 224 48)
 		(output)
-		(text "LCD_RS" (rect 0 0 40 12)(font "Arial" ))
-		(text "LCD_RS" (rect 203 59 243 71)(font "Arial" ))
-		(line (pt 264 64)(pt 248 64)(line_width 1))
+		(text "lcd_rs" (rect 0 0 24 12)(font "Arial" ))
+		(text "lcd_rs" (rect 179 43 203 55)(font "Arial" ))
+		(line (pt 224 48)(pt 208 48)(line_width 1))
+	)
+	(port
+		(pt 224 64)
+		(output)
+		(text "lcd_rw" (rect 0 0 25 12)(font "Arial" ))
+		(text "lcd_rw" (rect 178 59 203 71)(font "Arial" ))
+		(line (pt 224 64)(pt 208 64)(line_width 1))
+	)
+	(port
+		(pt 224 80)
+		(output)
+		(text "lcd_db[7..4]" (rect 0 0 47 12)(font "Arial" ))
+		(text "lcd_db[7..4]" (rect 156 75 203 87)(font "Arial" ))
+		(line (pt 224 80)(pt 208 80)(line_width 3))
 	)
 	(parameter
-		"CntMax"
-		"49999"
+		"CLK_PERIOD_NS"
+		"20"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 248 96)(line_width 1))
+		(rectangle (rect 16 16 208 96)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 280 -64 380 16))
+	(annotation_block (parameter)(rect 240 -64 340 16))
 )

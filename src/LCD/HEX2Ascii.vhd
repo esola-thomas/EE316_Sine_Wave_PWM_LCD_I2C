@@ -31,7 +31,7 @@ begin
         when "1101" => ASCII <= X"44"; -- D
         when "1110" => ASCII <= X"45"; -- E
         when "1111" => ASCII <= X"46"; -- F
-	    when OTHERS => ASCII <= X"0000"; --undefined state
+	    when OTHERS => ASCII <= X"00"; --undefined state
         end case;
     end process;
 end architecture; 

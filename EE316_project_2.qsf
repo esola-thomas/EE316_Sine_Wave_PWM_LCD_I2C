@@ -646,14 +646,8 @@ set_location_assignment PIN_A8 -to I2C_SDAT
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to I2C_SDAT
 set_location_assignment PIN_Y15 -to IRDA_RXD
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to IRDA_RXD
-set_location_assignment PIN_R24 -to KEY[3]
-set_instance_assignment -name IO_STANDARD "2.5 V" -to KEY[3]
 set_location_assignment PIN_N21 -to KEY[2]
 set_instance_assignment -name IO_STANDARD "2.5 V" -to KEY[2]
-set_location_assignment PIN_M21 -to KEY[1]
-set_instance_assignment -name IO_STANDARD "2.5 V" -to KEY[1]
-set_location_assignment PIN_M23 -to KEY[0]
-set_instance_assignment -name IO_STANDARD "2.5 V" -to KEY[0]
 set_location_assignment PIN_L6 -to LCD_BLON
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to LCD_BLON
 set_location_assignment PIN_M5 -to LCD_DATA[7]
@@ -1105,6 +1099,14 @@ set_instance_assignment -name IO_STANDARD LVDS -to HSMC_CLKOUT_N2
 set_location_assignment PIN_G24 -to HSMC_CLKOUT_N1
 set_instance_assignment -name IO_STANDARD LVDS -to HSMC_CLKOUT_N1
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
+set_global_assignment -name ENABLE_SIGNALTAP ON
+set_global_assignment -name USE_SIGNALTAP_FILE output_files/LCD.stp
+set_location_assignment PIN_M23 -to system_reset
+set_instance_assignment -name IO_STANDARD "2.5 V" -to system_reset
+set_location_assignment PIN_M21 -to sw_mode
+set_instance_assignment -name IO_STANDARD "2.5 V" -to sw_mode
+set_location_assignment PIN_R24 -to test
+set_instance_assignment -name IO_STANDARD "2.5 V" -to test
 set_global_assignment -name VHDL_FILE src/Counter/counter/counter_tb.vhd
 set_global_assignment -name VHDL_FILE src/I2C_Controller/i2c_master_2.1.vhd
 set_global_assignment -name BDF_FILE src/EE316_project_2.bdf
@@ -1113,9 +1115,11 @@ set_global_assignment -name VHDL_FILE src/System_State/system_state.vhd
 set_global_assignment -name QIP_FILE src/ROM_Old_mif/ROM_old.qip
 set_global_assignment -name VHDL_FILE src/Counter/clk_en/clk_en.vhd
 set_global_assignment -name VHDL_FILE src/Counter/decimal_counter.vhd
-set_global_assignment -name VHDL_FILE src/LCD/EE316_project_2.vhd
-set_global_assignment -name VHDL_FILE src/LCD/LCD_master.vhd
-set_global_assignment -name VHDL_FILE src/LCD/LCD_user_logic.vhd
 set_global_assignment -name VHDL_FILE src/LCD/HEX2Ascii.vhd
 set_global_assignment -name VHDL_FILE src/Counter/counter/counter.vhd
+set_global_assignment -name SIGNALTAP_FILE output_files/LCD.stp
+set_global_assignment -name VHDL_FILE LCD_user_logic.vhd
+set_global_assignment -name VHDL_FILE LCD_master.vhd
+set_global_assignment -name VHDL_FILE lcd_controller.vhd
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name SLD_FILE "C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/output_files/LCD_auto_stripped.stp"

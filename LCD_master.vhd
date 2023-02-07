@@ -3,7 +3,7 @@ USE ieee.std_logic_1164.all;
 use IEEE.NUMERIC_STD.ALL;
  
 entity LCD_master is
-    Generic (Constant CntMax : integer:= 49999);
+    Generic (Constant CntMax : integer:= 49999);  -- (125 MHz/500 KHz) - 1 = 249 1999999
     Port ( clock             : in std_logic; -- board clock
            iLCD_DATA         : in std_logic_vector(7 downto 0);
            iLCD_RS           : in std_logic;
@@ -22,15 +22,14 @@ architecture state_machine of LCD_master is
     signal state    : stateType;      
     signal cnt      : integer range 0 to CntMax; --use CntMax
     signal clock_en : std_logic;
-    signal not_iReset_n : std_logic;
  
    
 begin
  
 Clock_Enable:
-process(clock, not_iReset_n)
+process(clock, iReset_n)
 begin
-  if not_iReset_n = '0' then
+  if iReset_n = '0' then
       cnt<=0;
       clock_en<='0';
   elsif rising_edge(clock) then
@@ -46,9 +45,9 @@ end process;
  
  
 LCD_state_machine:
-process(clock, not_iReset_n, clock_en)
+process(clock, iReset_n, clock_en)
 begin
-if (resetDelay = '0' or not_iReset_n = '0') then
+if (resetDelay = '0' or iReset_n = '0') then
     LCD_DATA      <= X"38";
     LCD_RS       <= '0';
     LCD_EN       <= '0';
@@ -75,7 +74,7 @@ elsif rising_edge(clock) and clock_en = '1' then
             state    <= EnLow;          
        when EnLow =>
             LCD_EN      <= '0';                        
-            state    <= Done;            
+        state    <= Done;            
         when Done =>
             oBusy <= '0';
             LCD_EN <= '0';
@@ -87,5 +86,4 @@ end if;
    
 end process;
  
-not_iReset_n <= not iReset_n;
 end state_machine;

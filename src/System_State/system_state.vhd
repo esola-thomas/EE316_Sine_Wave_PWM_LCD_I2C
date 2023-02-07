@@ -10,6 +10,7 @@ port(
 	iReset 	: in std_logic;
 	PWM_en 		: out std_logic;
 	clk_en 		: out std_logic;
+	direction	: out std_logic;
 	o_global_reset : out std_logic;
 	o_state_message : out std_logic_vector (127 downto 0) 
 	);
@@ -92,7 +93,7 @@ begin
 				o_global_reset <= '0';
 				halt_clk_en <= '0';
 				delay <= 49999999;
-				state_message <= "Test Mode       ";
+				state_message <= "~~ Test Mode ~ @";
 			elsif (current_state = Pause_Mode) then
 				o_global_reset <= '0';
 				halt_clk_en <= '1';
@@ -134,4 +135,7 @@ begin
 	o_state_message (23 downto 16) <= std_logic_vector(to_unsigned(character'pos(state_message(14)), 8));
 	o_state_message (15 downto 8) <= std_logic_vector(to_unsigned(character'pos(state_message(15)), 8));
 	o_state_message (7 downto 0) <= std_logic_vector(to_unsigned(character'pos(state_message(16)), 8));
+	-- o_state_message <= X"41414141414141414141414141414141";
+
+	direction <= '1';
 end;

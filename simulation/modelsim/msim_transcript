@@ -10,7 +10,17 @@
 # ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
 #          Updated modelsim.ini.
 # 
-# vcom -93 -work work {D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd}
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity system_state
+# -- Compiling architecture arch of system_state
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -18,7 +28,23 @@
 # -- Loading package NUMERIC_STD
 # -- Compiling entity decimal_counter
 # -- Compiling architecture arch of decimal_counter
-# vcom -93 -work work {D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/counter/counter.vhd}
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/LCD/LCD_master.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity LCD_master
+# -- Compiling architecture state_machine of LCD_master
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/LCD/LCD_user_logic.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity LCD_user_logic
+# -- Compiling architecture user_logic of LCD_user_logic
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/counter/counter.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -27,7 +53,27 @@
 # -- Compiling entity counter
 # -- Compiling architecture arch of counter
 # 
-vcom -reportprogress 300 -work work D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
+vcom -reportprogress 300 -work work C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decimal_counter_tb
+# -- Compiling architecture tb of decimal_counter_tb
+# ** Error: C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd(12): near "37700000000": (vcom-119) Integer value exceeds INTEGER'high.
+# ** Error: C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd(88): VHDL Compiler exiting
+vcom -reportprogress 300 -work work C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity decimal_counter_tb
+# -- Compiling architecture tb of decimal_counter_tb
+# ** Error: C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd(12): near "4026531840": (vcom-119) Integer value exceeds INTEGER'high.
+# ** Error: C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd(88): VHDL Compiler exiting
+vcom -reportprogress 300 -work work C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -44,47 +90,22 @@ vsim -voptargs=+acc work.decimal_counter_tb
 # Loading work.decimal_counter_tb(tb)
 # Loading work.decimal_counter(arch)
 # Loading work.counter(arch)
-
-quietly WaveActivateNextPane {} 0
-add wave -noupdate -label clk /decimal_counter_tb/clk
-add wave -noupdate -label ireset /decimal_counter_tb/ireset
-add wave -noupdate -label direction /decimal_counter_tb/direction
-add wave -noupdate -label o_integer /decimal_counter_tb/i
-add wave -noupdate -label o_decimal /decimal_counter_tb/d
-add wave -noupdate -label int_carry_count /decimal_counter_tb/DUT/int_carry_count
-add wave -noupdate -label int_reg /decimal_counter_tb/DUT/int_reg
-add wave -noupdate -label deci_reg /decimal_counter_tb/DUT/deci_reg
-add wave -noupdate -label int_count_out_(bit) -radix decimal /decimal_counter_tb/DUT/int_count_out
-
-
-do counte
-# Cannot open macro file: counte
-
+add wave -position insertpoint  \
+sim:/decimal_counter_tb/clk
+add wave -position insertpoint  \
+sim:/decimal_counter_tb/ireset
+add wave -position insertpoint  \
+sim:/decimal_counter_tb/direction \
+sim:/decimal_counter_tb/i \
+sim:/decimal_counter_tb/d
 run
-do decimal_counter.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
+run
+run
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 260 ns  Iteration: 1  Instance: /decimal_counter_tb/DUT/int_counter
+# ** Warning: NUMERIC_STD.TO_UNSIGNED: vector truncated
+#    Time: 260 ns  Iteration: 1  Instance: /decimal_counter_tb/DUT/deci_counter
+vcom -work work -O0 C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -101,502 +122,12 @@ vsim -voptargs=+acc work.decimal_counter_tb
 # Loading work.decimal_counter_tb(tb)
 # Loading work.decimal_counter(arch)
 # Loading work.counter(arch)
-do decimal_counter.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-run
-run
-run
-restart
-# Loading work.decimal_counter_tb(tb)
-# Loading work.decimal_counter(arch)
-pwd
-# D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/simulation/modelsim
-do decimal_counter.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd(58): Signal "deci_count_out" is type ieee.std_logic_1164.STD_LOGIC_VECTOR; expecting type ieee.std_logic_1164.STD_LOGIC.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd(80): VHDL Compiler exiting
-# ** Error: C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-# Error in macro ./decimal_counter.do line 1
-# C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-#     while executing
-# "vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd"
-do decimal_counter.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# Loading work.decimal_counter_tb(tb)
-# Loading work.decimal_counter(arch)
-# ** Error: (vsim-3732) D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd(58): No default binding for component instance 'int_counter'.
-# 
-#    The following component port is not on the entity:
-#           carry_in
-# 
-#         Region: /decimal_counter_tb/DUT/int_counter
-# ** Error: (vsim-3732) D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd(61): No default binding for component instance 'deci_counter'.
-# 
-#    The following component port is not on the entity:
-#           carry_in
-# 
-#         Region: /decimal_counter_tb/DUT/deci_counter
-# ** Error: No Design Loaded!
-# Error in macro ./decimal_counter.do line 4
-# No Design Loaded!
-#     while executing
-# "run 2000 ns"
-do decimal_counter.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# ** Error: No Design Loaded!
-# Executing ONERROR command at macro ./decimal_counter.do line 5
-# ** Error: No Design Loaded!
-# Executing ONERROR command at macro ./decimal_counter.do line 6
-do decimal_counter.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# ** Error: No Design Loaded!
-# Executing ONERROR command at macro ./decimal_counter.do line 32
-# ** Error: No Design Loaded!
-# Executing ONERROR command at macro ./decimal_counter.do line 33
-do decimal_counter.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# ** Error: No Design Loaded!
-# Executing ONERROR command at macro ./decimal_counter.do line 32
-do decimal_counter.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# ** Error: No Design Loaded!
-# Executing ONERROR command at macro ./decimal_counter.do line 32
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-vsim -voptargs=+acc work.decimal_counter_tb
-# vsim -voptargs=+acc work.decimal_counter_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.decimal_counter_tb(tb)
-# Loading work.decimal_counter(arch)
-# Loading work.counter(arch)
-# ** Error: (vsim-3732) D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd(58): No default binding for component instance 'int_counter'.
-# 
-#    The following component port is not on the entity:
-#           carry_in
-# 
-#         Region: /decimal_counter_tb/DUT/int_counter
-# ** Error: (vsim-3732) D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd(61): No default binding for component instance 'deci_counter'.
-# 
-#    The following component port is not on the entity:
-#           carry_in
-# 
-#         Region: /decimal_counter_tb/DUT/deci_counter
-# Error loading design
-vsim -voptargs=+acc work.decimal_counter
-# vsim -voptargs=+acc work.decimal_counter 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.decimal_counter(arch)
-# Loading work.counter(arch)
-# ** Error: (vsim-3732) D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd(58): No default binding for component instance 'int_counter'.
-# 
-#    The following component port is not on the entity:
-#           carry_in
-# 
-#         Region: /decimal_counter/int_counter
-# ** Error: (vsim-3732) D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd(61): No default binding for component instance 'deci_counter'.
-# 
-#    The following component port is not on the entity:
-#           carry_in
-# 
-#         Region: /decimal_counter/deci_counter
-# Error loading design
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-vsim -voptargs=+acc work.decimal_counter_tb
-# vsim -voptargs=+acc work.decimal_counter_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.decimal_counter_tb(tb)
-# Loading work.decimal_counter(arch)
-# Loading work.counter(arch)
-# ** Error: (vsim-3732) D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd(58): No default binding for component instance 'int_counter'.
-# 
-#    The following component port is not on the entity:
-#           carry_in
-# 
-#         Region: /decimal_counter_tb/DUT/int_counter
-# ** Error: (vsim-3732) D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd(61): No default binding for component instance 'deci_counter'.
-# 
-#    The following component port is not on the entity:
-#           carry_in
-# 
-#         Region: /decimal_counter_tb/DUT/deci_counter
-# Error loading design
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-vsim -voptargs=+acc work.decimal_counter_tb
-# vsim -voptargs=+acc work.decimal_counter_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.decimal_counter_tb(tb)
-# Loading work.decimal_counter(arch)
-# Loading work.counter(arch)
-# ** Error: (vsim-3732) D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd(58): No default binding for component instance 'int_counter'.
-# 
-#    The following component port is not on the entity:
-#           carry_in
-# 
-#         Region: /decimal_counter_tb/DUT/int_counter
-# ** Error: (vsim-3732) D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd(61): No default binding for component instance 'deci_counter'.
-# 
-#    The following component port is not on the entity:
-#           carry_in
-# 
-#         Region: /decimal_counter_tb/DUT/deci_counter
-# Error loading design
-vcom -93 -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/counter/counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-vsim -voptargs=+acc work.decimal_counter_tb
-# vsim -voptargs=+acc work.decimal_counter_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.decimal_counter_tb(tb)
-# Loading work.decimal_counter(arch)
-# Loading work.counter(arch)
-run 2000 ns
-run 2000 ns
-vcom -93 -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/counter/counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/counter/counter.vhd(53): Aggregate expression cannot be scalar type std.STANDARD.BOOLEAN.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/counter/counter.vhd(74): VHDL Compiler exiting
-# C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-vcom -93 -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/counter/counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-restart
-# Loading work.decimal_counter_tb(tb)
-# Loading work.decimal_counter(arch)
-# Loading work.counter(arch)
-run 2000 ns
-run 2000 ns
-write format wave -window .main_pane.wave.interior.cs.body.pw.wf D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/simulation/modelsim/temp.do
-run 2000 ns
-run 2000 ns
-run 2000 ns
-run 2000 ns
-restart
-restart
-run 2000 ns
-run
-run
-run
-force -freeze sim:/decimal_counter_tb/direction 0 0
-run
-run
-run
-run
-run
-vcom -93 -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/counter/counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-vsim -voptargs=+acc work.decimal_counter_tb
-# vsim -voptargs=+acc work.decimal_counter_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.decimal_counter_tb(tb)
-# Loading work.decimal_counter(arch)
-# Loading work.counter(arch)
-do temp.do
-run 2000 ns
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-force -freeze sim:/decimal_counter_tb/direction 0 0
-run
-run
-run
-run
-vcom -93 -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/counter/counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-vsim -voptargs=+acc work.decimal_counter_tb
-# vsim -voptargs=+acc work.decimal_counter_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.decimal_counter_tb(tb)
-# Loading work.decimal_counter(arch)
-# Loading work.counter(arch)
-vcom -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-vsim -voptargs=+acc work.decimal_counter_tb
-# vsim -voptargs=+acc work.decimal_counter_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.decimal_counter_tb(tb)
-# Loading work.decimal_counter(arch)
-# Loading work.counter(arch)
-do temp.do
-run 2000 ns
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-force -freeze sim:/decimal_counter_tb/direction 0 0
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
-run
+add wave -position insertpoint  \
+sim:/decimal_counter_tb/clk \
+sim:/decimal_counter_tb/ireset \
+sim:/decimal_counter_tb/direction \
+sim:/decimal_counter_tb/i \
+sim:/decimal_counter_tb/d
+# Can't move the Now cursor.
+# Can't move the Now cursor.
 run
