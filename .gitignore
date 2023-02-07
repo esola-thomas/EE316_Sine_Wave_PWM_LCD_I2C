@@ -23,7 +23,9 @@ _*
 *.mov 
 *.vsdx
 *.bak
+*.bak1
+*.bak2
 *.jar
-
+*.wlf
 
 simulation/modelsim/SRAM_Counter_7_1200mv_0c_vhd_slow.sdo

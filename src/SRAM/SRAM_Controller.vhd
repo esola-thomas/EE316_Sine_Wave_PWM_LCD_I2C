@@ -14,7 +14,7 @@ port(
     -- Memory outputs
     SRAM_data   : inout std_logic_vector(15 downto 0); -- Bus to SRAM IC
     oMemAdress  : out std_logic_Vector(19 downto 0);
-    oCE, oUB, oLB, oWE, oOE : out std_logic;
+    oCE, oUB, oLB, oWE, oOE : out std_logic
     );
 end SRAM_Controller;
 
