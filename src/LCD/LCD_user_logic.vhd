@@ -9,7 +9,7 @@ ENTITY LCD_user_logic IS
   PORT(
     clk         : IN     STD_LOGIC;                
     iReset_n    : IN     STD_LOGIC;
-    SDK_message : IN     STD_LOGIC_VECTOR(15 DOWNTO 0);
+    LCD_message : IN     STD_LOGIC_VECTOR(31 DOWNTO 0);
     LCD_DATA  : OUT     STD_LOGIC_VECTOR(7 DOWNTO 0);
     LCD_EN  : OUT     STD_LOGIC;
     LCD_RS  : OUT    STD_LOGIC);                    
@@ -27,10 +27,9 @@ signal temp_LCD_RS       : STD_LOGIC; --data to write
 signal LCD_RS_wr    : STD_LOGIC; --data to write
 signal busy       : STD_LOGIC;                    --indicates transaction in
 signal count    : unsigned(27 DOWNTO 0):=X"000000F";
-signal byteSel      : integer range 0 to 29:=0;
+signal byteSel      : integer range 0 to 41:=0;
 signal sig_LCD_DATA : std_logic_vector(7 DOWNTO 0);
 signal sig_LCD_EN, sig_LCD_RS     : std_logic;
-signal ASCII3, ASCII2, ASCII1, ASCII0  : std_logic_vector(7 DOWNTO 0);
  
 COMPONENT LCD_master is
   Generic (Constant CntMax : integer:= 49999);  -- (125 MHz/500 KHz) - 1 = 249
@@ -60,68 +59,92 @@ LCD_EN <= Sig_LCD_EN;
 process(byteSel)
  begin
     case byteSel is
-       when 0  => temp_LCD_DATA <= X"38";
+      when 0  =>  temp_LCD_DATA <= X"38";
                   temp_LCD_RS <= '0';
-       when 1  => temp_LCD_DATA <= X"38";
+      when 1  =>  temp_LCD_DATA <= X"38";
                   temp_LCD_RS <= '0';
-       when 2  => temp_LCD_DATA <= X"38";
+      when 2  =>  temp_LCD_DATA <= X"38";
                   temp_LCD_RS <= '0';    
-       when 3  => temp_LCD_DATA <= X"38";
+      when 3  =>  temp_LCD_DATA <= X"38";
                   temp_LCD_RS <= '0';
-       when 4  => temp_LCD_DATA <= X"38";
+      when 4  =>  temp_LCD_DATA <= X"38";
                   temp_LCD_RS <= '0';
-       when 5  => temp_LCD_DATA <= X"38";
+      when 5  =>  temp_LCD_DATA <= X"38";
                   temp_LCD_RS <= '0';
-       when 6  => temp_LCD_DATA <= X"01";
+      when 6  =>  temp_LCD_DATA <= X"01";
                   temp_LCD_RS <= '0';
-       when 7  => temp_LCD_DATA <= X"0C";
+      when 7  =>  temp_LCD_DATA <= X"0C";
                   temp_LCD_RS <= '0';
-       when 8  => temp_LCD_DATA <= X"06";
+      when 8  =>  temp_LCD_DATA <= X"06";
                   temp_LCD_RS <= '0';
-       when 9  => temp_LCD_DATA <= X"80";
+      when 9  =>  temp_LCD_DATA <= X"80";
                   temp_LCD_RS <= '0';
-       when 10  => temp_LCD_DATA <= X"53";
-                   temp_LCD_RS <= '1';
-       when 11  => temp_LCD_DATA <= X"79";
-                   temp_LCD_RS <= '1';    
-       when 12  => temp_LCD_DATA <= X"73";
-                   temp_LCD_RS <= '1';
-       when 13  => temp_LCD_DATA <= X"74";
-                   temp_LCD_RS <= '1';
-       when 14  => temp_LCD_DATA <= X"65";
-                   temp_LCD_RS <= '1';
-       when 15  => temp_LCD_DATA <= X"6D";
-                   temp_LCD_RS <= '1';
-       when 16  => temp_LCD_DATA <= X"FE";
-                   temp_LCD_RS <= '1';
-       when 17  => temp_LCD_DATA <= X"52";
-                   temp_LCD_RS <= '1';
-       when 18  => temp_LCD_DATA <= X"65";
-                   temp_LCD_RS <= '1';
-       when 19  => temp_LCD_DATA <= X"61";
-                   temp_LCD_RS <= '1';
-       when 20  => temp_LCD_DATA <= X"64";    
-                   temp_LCD_RS <= '1';
-       when 21  => temp_LCD_DATA <= X"79";  
-                   temp_LCD_RS <= '1';
-       when 22  => temp_LCD_DATA <= X"c0";    --repeat
-                   temp_LCD_RS <= '0';
-       when 23  => temp_LCD_DATA <= X"3D";
-                   temp_LCD_RS <= '1';
-       when 24  => temp_LCD_DATA <= X"3D";
-                   temp_LCD_RS <= '1';
-       when 25  => temp_LCD_DATA <= X"3E";
-                   temp_LCD_RS <= '1';
-       when 26  => temp_LCD_DATA <= ASCII3;   --ASCII3
-                   temp_LCD_RS <= '1';
-       when 27  => temp_LCD_DATA <= ASCII2;   --ASCII2
-                   temp_LCD_RS <= '1';
-       when 28  => temp_LCD_DATA <= ASCII1;   --ASCII1
-                   temp_LCD_RS <= '1';
-       when 29  => temp_LCD_DATA <= ASCII0;   --ASCII0
-                   temp_LCD_RS <= '1';
-       when others => temp_LCD_DATA <= X"38";
-                    temp_LCD_RS <= '0';
+      when 10  => temp_LCD_DATA <= X"53";
+                  temp_LCD_RS <= '1';
+      when 11  => temp_LCD_DATA <= X"79";
+                  temp_LCD_RS <= '1';    
+      when 12  => temp_LCD_DATA <= X"73";
+                  temp_LCD_RS <= '1';
+      when 13  => temp_LCD_DATA <= X"74";
+                  temp_LCD_RS <= '1';
+      when 14  => temp_LCD_DATA <= X"65";
+                  temp_LCD_RS <= '1';
+      when 15  => temp_LCD_DATA <= X"6D";
+                  temp_LCD_RS <= '1';
+      when 16  => temp_LCD_DATA <= X"FE";
+                  temp_LCD_RS <= '1';
+      when 17  => temp_LCD_DATA <= X"52";
+                  temp_LCD_RS <= '1';
+      when 18  => temp_LCD_DATA <= X"65";
+                  temp_LCD_RS <= '1';
+      when 19  => temp_LCD_DATA <= X"61";
+                  temp_LCD_RS <= '1';
+      when 20  => temp_LCD_DATA <= X"64";    
+                  temp_LCD_RS <= '1';
+      when 21  => temp_LCD_DATA <= X"79";  
+                  temp_LCD_RS <= '1';
+      when 22  => temp_LCD_DATA <= X"c0";    --repeat
+                  temp_LCD_RS <= '0';
+      when 23  => temp_LCD_DATA <= X"3D";
+                  temp_LCD_RS <= '1';
+      when 24  => temp_LCD_DATA <= X"3D";
+                  temp_LCD_RS <= '1';
+      when 25  => temp_LCD_DATA <= X"3E";
+                  temp_LCD_RS <= '1';
+      when 26  => temp_LCD_DATA <= X"30";   -- 1
+                  temp_LCD_RS <= '1';
+      when 27  => temp_LCD_DATA <= X"31";   -- 2
+                  temp_LCD_RS <= '1';
+      when 28  => temp_LCD_DATA <= x"32";   -- 3
+                  temp_LCD_RS <= '1';
+      when 29  => temp_LCD_DATA <= x"33";   -- 4
+                  temp_LCD_RS <= '1';
+      when 30  => temp_LCD_DATA <= x"34";   -- 5
+                  temp_LCD_RS <= '1';
+      when 31  => temp_LCD_DATA <= x"35";   -- 6
+                  temp_LCD_RS <= '1';
+      when 32  => temp_LCD_DATA <= x"36";   -- 7
+                  temp_LCD_RS <= '1';
+      when 33  => temp_LCD_DATA <= x"37";   -- 8
+                  temp_LCD_RS <= '1';
+      when 34  => temp_LCD_DATA <= x"38";   -- 9
+                  temp_LCD_RS <= '1';
+      when 35  => temp_LCD_DATA <= x"39";   -- 10
+                  temp_LCD_RS <= '1';
+      when 36  => temp_LCD_DATA <= x"41";   -- 11
+                  temp_LCD_RS <= '1';
+      when 37  => temp_LCD_DATA <= x"42";   -- 12
+                  temp_LCD_RS <= '1';
+      when 38  => temp_LCD_DATA <= x"43";   -- 13
+                  temp_LCD_RS <= '1';
+      when 39  => temp_LCD_DATA <= x"44";   -- 14
+                  temp_LCD_RS <= '1';
+      when 40  => temp_LCD_DATA <= x"45";   -- 15
+                  temp_LCD_RS <= '1';
+      when 41  => temp_LCD_DATA <= x"46";   -- 16
+                  temp_LCD_RS <= '1';
+      when others => temp_LCD_DATA <= X"38";
+                  temp_LCD_RS <= '0';
    end case;
 end process;
  
@@ -140,30 +163,6 @@ Inst_LCD_master: LCD_master
         LCD_RS => Sig_LCD_RS,
         LCD_EN => Sig_LCD_EN    
     );
- 
- Inst_H2A_3 : HEX2Ascii
-     port map (
-        HEX => SDK_Message(15 downto 12), 
-        ASCII => ASCII3
-    );
- 
-  Inst_H2A_2 : HEX2Ascii
-     port map (
-        HEX => SDK_Message(11 downto 8), 
-        ASCII => ASCII2
-    );
-    
-  Inst_H2A_1 : HEX2Ascii
-     port map (
-        HEX => SDK_Message(7 downto 4), 
-        ASCII => ASCII1
-    );   
-    
- Inst_H2A_0 : HEX2Ascii
-     port map (
-        HEX => SDK_Message(3 downto 0), 
-        ASCII => ASCII0
-    );    
  
 process(clk, iReset_n)
 begin
