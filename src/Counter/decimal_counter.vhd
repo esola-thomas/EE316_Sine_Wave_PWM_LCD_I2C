@@ -49,9 +49,6 @@ end component;
     signal deci_carry_out   : std_logic := '0';
     signal deci_count_out   : std_logic_vector (bus_size_decimal-1 downto 0);
 
-    -- Signals for combined counter
-    signal int_reg, deci_reg : integer := 0;
-
 begin
 
     int_counter : counter generic map (count_size => bus_size_integer, max_count => count_max_integer, count_step_size => count_step_integer, count_delay => count_delay)
@@ -60,15 +57,6 @@ begin
     deci_counter : counter generic map (count_size => bus_size_decimal, max_count => count_max_decimal, count_step_size => count_step_decimal, count_delay => count_delay)
     port map (clk => clk, ireset => ireset, direction => direction, carry_in => '0',count_out => deci_count_out, carry_out => deci_carry_out);
 
-	combine_counters : process(clk, ireset) is begin
-        if (ireset = '1') then
-            int_reg <= 0;
-            deci_reg <= 0;
-        else 
-            int_reg <= to_integer(unsigned(int_count_out));
-            deci_reg <= to_integer(unsigned(deci_count_out));
-        end if;
-	end process combine_counters;
-    i <=  int_reg;
-    d <= deci_reg;
+    i <= to_integer(unsigned(int_count_out));
+    d <= to_integer(unsigned(deci_count_out));
 end arch;
