@@ -58,7 +58,7 @@ begin
                         mem_state <= mem_idle;
                         birData_in <= '0'; -- Output the current Data_reg value
                         oWE <= '1';
-                        oOE <= '1';
+                        oOE <= '0';
                     end if;
 
                 when mem_write =>

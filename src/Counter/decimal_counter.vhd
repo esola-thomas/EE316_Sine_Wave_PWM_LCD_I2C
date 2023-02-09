@@ -8,8 +8,8 @@ entity decimal_counter is
 		count_step_decimal 	: integer := 25;    -- Delay part of delay (.25) <= Based on size
 		count_max_integer 	: integer := 10;
 		count_max_decimal	: integer := 100;
-        bus_size_integer    : integer := 4;
-        bus_size_decimal    : integer := 8;
+        bus_size_integer    : integer := 32;
+        bus_size_decimal    : integer := 32;
         count_delay         : integer := 3      -- Delay in clock cycles (delay do count up/down)
 	);
     port(
@@ -60,6 +60,6 @@ begin
 
     i <= to_integer(unsigned(int_count_out));
     d <= to_integer(unsigned(deci_count_out));
-    MSB_8 (7 downto 0) <= int_count_out (31 downto 24);     -- <= Just for this project
-    MSB_8 (8 downto 19) <= (others => '0');                 -- <= Just for this project
+    MSB_8 (7 downto 0) <= int_count_out (bus_size_integer-1 downto bus_size_integer-8);     -- <= Just for this project
+    MSB_8 (19 downto 8) <= (others => '0');                 -- <= Just for this project
 end arch;
