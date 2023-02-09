@@ -59,20 +59,6 @@ applicable agreement for further details.
 		(line (pt 0 96)(pt 16 96)(line_width 1))
 	)
 	(port
-		(pt 0 112)
-		(input)
-		(text "init" (rect 0 0 9 12)(font "Arial" ))
-		(text "init" (rect 21 107 30 119)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112)(line_width 1))
-	)
-	(port
-		(pt 0 128)
-		(input)
-		(text "PR_Mode" (rect 0 0 42 12)(font "Arial" ))
-		(text "PR_Mode" (rect 21 123 63 135)(font "Arial" ))
-		(line (pt 0 128)(pt 16 128)(line_width 1))
-	)
-	(port
 		(pt 256 48)
 		(output)
 		(text "oMemAdress[19..0]" (rect 0 0 80 12)(font "Arial" ))
@@ -113,13 +99,6 @@ applicable agreement for further details.
 		(text "oOE" (rect 0 0 18 12)(font "Arial" ))
 		(text "oOE" (rect 217 123 235 135)(font "Arial" ))
 		(line (pt 256 128)(pt 240 128)(line_width 1))
-	)
-	(port
-		(pt 256 144)
-		(output)
-		(text "display_mem[7..0]" (rect 0 0 74 12)(font "Arial" ))
-		(text "display_mem[7..0]" (rect 161 139 235 151)(font "Arial" ))
-		(line (pt 256 144)(pt 240 144)(line_width 3))
 	)
 	(port
 		(pt 256 32)

@@ -12,7 +12,11 @@ port(
 	clk_en 		: out std_logic;
 	direction	: out std_logic;
 	o_global_reset : out std_logic;
-	o_state_message : out std_logic_vector (127 downto 0) 
+	o_state_message : out std_logic_vector (127 downto 0);
+	init_signal     : out std_logic;
+	SRAM_R_W		: out std_logic;
+	SRMA_clk_en		: out std_logic;
+	rst_dec_count	: out std_logic := '0'
 	);
 end system_state;
 
@@ -26,12 +30,20 @@ type system_state is (
 	PWM
 );
 
+type init_sequence is (
+	init_reset,
+	load_SRAM,
+	init_complete
+);
+
 signal current_state : system_state := init;
+signal init_state : init_sequence := init_reset;
 
 signal en : std_logic := '0';
-signal halt_clk_en : std_logic := '0';
-signal count : integer := 0;
-signal delay : integer := 49999999;
+signal halt_clk_en 	: std_logic := '0';
+signal init_count	: integer := 0;
+signal clk_en_count : integer := 0;
+signal clk_en_delay : integer := 49999999;
 
 signal sw_mode_press, sw_mode_release : std_logic := '0';
 
@@ -55,25 +67,25 @@ begin
 			current_state <= global_reset;
 		elsif (current_state = global_reset and iReset = '0') then
 			current_state <= init;
-		elsif (current_state = init) then
-			-- Some sort of counter to keep track of SRAM init from ROM
-			current_state <= Test_Mode;
-		elsif (current_state = global_reset) then 
-			if (iReset = '1') then 
-				current_state <= init;
-			else 
-				current_state <= global_reset;
-			end if;
-		elsif (current_state = Test_Mode) then
-			if (sw_mode_release = '1') then
-				current_state <= Pause_Mode;
-			end if;
-		elsif (current_state = Pause_Mode) then
-			if (sw_mode_release = '1') then
-				current_state <= Test_Mode;
-			end if;
-		elsif (current_state = PWM) then
-			PWM_en <= '1'; 
+		else 
+			case current_state is
+				when init =>
+					if (init_state = init_complete) then
+						current_state <= Test_Mode;
+					else 
+						current_state <= init;
+					end if;
+				when Test_Mode =>
+					if (sw_mode_release = '1') then
+						current_state <= Pause_Mode;
+					end if;
+				when Pause_Mode => 
+					if (sw_mode_release = '1') then
+						current_state <= Test_Mode;
+					end if;
+				when PWM => 
+					PWM_en <= '1'; 
+			end case;			
 		end if;
 	end process select_state;
 
@@ -81,19 +93,46 @@ begin
 	system_state_process : process (clk, current_state) begin
 		if (rising_edge(clk)) then  
 			if (current_state = init) then
-				o_global_reset <= '0';
-				halt_clk_en <= '0';
+				case init_state is 
+					when init_reset => -- Send global reset signal for 10 clk cycles
+						if (init_count < 10) then 
+							init_count <= init_count + 1;
+							o_global_reset <= '1';
+							halt_clk_en <= '1'; -- Halt clk_en (this resets its counter)
+						else
+							o_global_reset <= '0';
+							init_count <= 0; -- After reseting all the system start clk_en
+							init_state <= load_SRAM;
+						end if;
+					when load_SRAM => -- After reseting all system load SRAM (256 values)
+						o_global_reset <= '0';
+						SRAM_R_W <= '0'; -- Set SRAM to Write mode
+						if (init_count <= 255 and en = '1') then
+							init_count <= init_count + 1;
+							SRMA_clk_en <= '1';
+						elsif (init_count > 255) then -- 255 Values loaded to SRAM 
+							halt_clk_en <= '1'; -- resets clk_en counter
+							init_state <= init_complete;  
+							SRMA_clk_en <= '0';
+						end if;
+					when init_complete =>
+						o_global_reset <= '0';
+						init_state <= init_complete; 
+				end case;
+				clk_en_delay <= 49999999; -- Load Values to SRAM at a faster Rate
 				state_message <= "Init SRAM...    ";
 			elsif (current_state = global_reset) then
-			o_global_reset <= '1';
+				init_state <= init_reset;
+				o_global_reset <= '1';
 				halt_clk_en <= '1';
-				delay <= 49999999; -- Change this one after testing
 				state_message <= "Global Reset    ";
 			elsif (current_state = Test_Mode) then
+				SRAM_R_W <= '1'; -- Set SRAM controller to Read Mode
+				SRMA_clk_en <= en;
 				o_global_reset <= '0';
 				halt_clk_en <= '0';
-				delay <= 49999999;
-				state_message <= "~~ Test Mode ~ @";
+				clk_en_delay <= 49999999; -- Set counter speed to 1
+				state_message <= "~~ Test  Mode ~~";
 			elsif (current_state = Pause_Mode) then
 				o_global_reset <= '0';
 				halt_clk_en <= '1';
@@ -107,17 +146,18 @@ begin
 	end process system_state_process;
 
 	clk_enabler : process (clk) begin
-		if (count = delay and halt_clk_en = '0') then
+		if (clk_en_count = clk_en_delay and halt_clk_en = '0') then
 			en <= '1';
-			count <= 0;
-		elsif (count < delay and halt_clk_en = '0') then
+			clk_en_count <= 0;
+		elsif (clk_en_count < clk_en_delay and halt_clk_en = '0') then
 			en <= '0';
-			count <= count + 1;
-		elsif (iReset = '1') then
+			clk_en_count <= clk_en_count + 1;
+		elsif (iReset = '1' or halt_clk_en = '1') then
 			en <= '0';
-			count <= 0;
+			clk_en_count <= 0;
 		end if;
 	end process clk_enabler;
+
 	clk_en <= en;
 	o_state_message (127 downto 120) <= std_logic_vector(to_unsigned(character'pos(state_message(1)), 8));
 	o_state_message (119 downto 112) <= std_logic_vector(to_unsigned(character'pos(state_message(2)), 8));
@@ -138,4 +178,5 @@ begin
 	-- o_state_message <= X"41414141414141414141414141414141";
 
 	direction <= '1';
+	init_signal <= '1' when (current_state = init) else '0';
 end;

@@ -16,7 +16,8 @@ entity decimal_counter is
 		clk 	    : in std_logic; 
 		ireset	    : in std_logic; -- Active high
         direction   : in std_logic;
-        i,d         : out integer
+        i,d         : out integer;
+        MSB_8       : out std_logic_vector (19 downto 0) -- <= This is just for this project, as well as lines 63 and 64
 	);
 end decimal_counter;
 
@@ -59,4 +60,6 @@ begin
 
     i <= to_integer(unsigned(int_count_out));
     d <= to_integer(unsigned(deci_count_out));
+    MSB_8 (7 downto 0) <= int_count_out (31 downto 24);     -- <= Just for this project
+    MSB_8 (8 downto 19) <= (others => '0');                 -- <= Just for this project
 end arch;

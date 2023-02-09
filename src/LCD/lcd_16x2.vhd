@@ -1,7 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity lcd_controller is
+entity lcd_16x2 is
   
   generic (
     CLK_PERIOD_NS : positive := 20);    -- 50MHz
@@ -16,9 +16,9 @@ entity lcd_controller is
     line1_buffer : in  std_logic_vector(127 downto 0);  -- 16x8bit
     line2_buffer : in  std_logic_vector(127 downto 0)); 
 
-end entity lcd_controller;
+end entity lcd_16x2;
 
-architecture rtl of lcd_controller is
+architecture rtl of lcd_16x2 is
 
   constant DELAY_15_MS   : positive := 15 * 10**6 / CLK_PERIOD_NS + 1;
   constant DELAY_1640_US : positive := 1640 * 10**3 / CLK_PERIOD_NS + 1;
@@ -33,15 +33,15 @@ architecture rtl of lcd_controller is
   constant MAX_DELAY : positive := DELAY_15_MS;
 
   -- this record describes one write operation
-  type op_t is record
+  type operation is record
     rs      : std_logic;
     data    : std_logic_vector(7 downto 0);
     delay_h : integer range 0 to MAX_DELAY;
     delay_l : integer range 0 to MAX_DELAY;
-  end record op_t;
-  constant default_op      : op_t := (rs => '1', data => X"00", delay_h => DELAY_NIBBLE, delay_l => DELAY_40_US);
-  constant op_select_line1 : op_t := (rs => '0', data => X"80", delay_h => DELAY_NIBBLE, delay_l => DELAY_40_US);
-  constant op_select_line2 : op_t := (rs => '0', data => X"C0", delay_h => DELAY_NIBBLE, delay_l => DELAY_40_US);
+  end record operation;
+  constant default_op      : operation := (rs => '1', data => X"00", delay_h => DELAY_NIBBLE, delay_l => DELAY_40_US);
+  constant op_select_line1 : operation := (rs => '0', data => X"80", delay_h => DELAY_NIBBLE, delay_l => DELAY_40_US);
+  constant op_select_line2 : operation := (rs => '0', data => X"C0", delay_h => DELAY_NIBBLE, delay_l => DELAY_40_US);
 
   -- init + config operations:
   -- write 3 x 0x3 followed by 0x2
@@ -49,7 +49,7 @@ architecture rtl of lcd_controller is
   -- entry mode set command
   -- display on/off command
   -- clear display
-  type config_ops_t is array(0 to 5) of op_t;
+  type config_ops_t is array(0 to 5) of operation;
   constant config_ops : config_ops_t
     := (5 => (rs => '0', data => X"33", delay_h => DELAY_4100_US, delay_l => DELAY_100_US),
         4 => (rs => '0', data => X"32", delay_h => DELAY_40_US, delay_l => DELAY_40_US),
@@ -58,7 +58,7 @@ architecture rtl of lcd_controller is
         1 => (rs => '0', data => X"0C", delay_h => DELAY_NIBBLE, delay_l => DELAY_40_US),
         0 => (rs => '0', data => X"01", delay_h => DELAY_NIBBLE, delay_l => DELAY_1640_US));
 
-  signal this_op : op_t;
+  signal this_op : operation;
 
   type op_state_t is (IDLE,
                       WAIT_SETUP_H,

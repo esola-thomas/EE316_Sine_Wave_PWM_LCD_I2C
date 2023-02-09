@@ -9,7 +9,7 @@ port(
     iMemAdress  : in std_logic_vector(19 downto 0); -- Memory adress to read/write
     R_W         : in std_logic; -- Read when HIGH, Write when LOW
     clk         : in std_logic;
-    clk_en      : in std_logic; -- clk enable from counter this triggers change form idle
+    clk_en      : in std_logic; -- clk enable this triggers change form idle
 
     -- Memory outputs
     SRAM_data   : inout std_logic_vector(15 downto 0); -- Bus to SRAM IC
@@ -90,7 +90,7 @@ begin
                     else                        -- Stay in idle state
 						mem_state <= mem_idle;
                         Data_reg <= Data_reg;
-                        birData_in <= '1'; -- Go to High Impedance mode on idle
+                        birData_in <= '0'; -- Output the current Data_reg value
                         oWE <= '1';
                         oOE <= '1'; 
                     end if;

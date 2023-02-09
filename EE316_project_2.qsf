@@ -1107,19 +1107,16 @@ set_location_assignment PIN_M21 -to sw_mode
 set_instance_assignment -name IO_STANDARD "2.5 V" -to sw_mode
 set_location_assignment PIN_R24 -to test
 set_instance_assignment -name IO_STANDARD "2.5 V" -to test
-set_global_assignment -name VHDL_FILE src/Counter/counter/counter_tb.vhd
-set_global_assignment -name VHDL_FILE src/I2C_Controller/i2c_master_2.1.vhd
-set_global_assignment -name BDF_FILE src/EE316_project_2.bdf
-set_global_assignment -name VHDL_FILE src/SRAM/SRAM_Controller.vhd
-set_global_assignment -name VHDL_FILE src/System_State/system_state.vhd
-set_global_assignment -name QIP_FILE src/ROM_Old_mif/ROM_old.qip
-set_global_assignment -name VHDL_FILE src/Counter/clk_en/clk_en.vhd
-set_global_assignment -name VHDL_FILE src/Counter/decimal_counter.vhd
-set_global_assignment -name VHDL_FILE src/LCD/HEX2Ascii.vhd
-set_global_assignment -name VHDL_FILE src/Counter/counter/counter.vhd
-set_global_assignment -name SIGNALTAP_FILE output_files/LCD.stp
-set_global_assignment -name VHDL_FILE LCD_user_logic.vhd
-set_global_assignment -name VHDL_FILE LCD_master.vhd
-set_global_assignment -name VHDL_FILE lcd_controller.vhd
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name SLD_FILE "C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/output_files/LCD_auto_stripped.stp"
+set_global_assignment -name VHDL_FILE src/memory_adress/memory_adress.vhd
+set_global_assignment -name VHDL_FILE src/clk_en/clk_en.vhd
+set_global_assignment -name BDF_FILE src/EE316_project_2.bdf
+set_global_assignment -name VHDL_FILE src/System_State/system_state.vhd
+set_global_assignment -name VHDL_FILE src/SRAM/SRAM_Controller.vhd
+set_global_assignment -name VHDL_FILE src/ROM_Old_mif/ROM_old.vhd
+set_global_assignment -name VHDL_FILE src/LCD/lcd_16x2.vhd
+set_global_assignment -name VHDL_FILE src/Counter/counter/counter.vhd
+set_global_assignment -name VHDL_FILE src/Counter/decimal_counter.vhd
+set_global_assignment -name VHDL_FILE src/MUX/mux_2_input.vhd
+set_global_assignment -name VHDL_FILE src/concat_zero/concat_zero_to_input.vhd
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
