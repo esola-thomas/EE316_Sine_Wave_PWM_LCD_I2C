@@ -51,6 +51,7 @@ DUT: i2c_master
 
 process
 begin
+	clk <= not clk after 10ns;
 	reset_n <= '0';
 	ena <= '0';
  	rw <= '0';	
