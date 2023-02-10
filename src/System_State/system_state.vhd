@@ -46,6 +46,10 @@ signal halt_clk_en 	: std_logic := '0';
 signal init_count	: integer := 0;
 signal clk_en_count : integer := 0;
 signal clk_en_delay : integer := 49999999;
+signal mode_btn_state : std_logic_vector (1 downto 0) := "00"; 
+signal btn_debounce_count : integer := 0;
+constant btn_debounce_delay : integer := 49999;
+
 
 -- Boot Reset delay signal
 signal boot_reset	: std_logic := '1';
@@ -54,7 +58,6 @@ signal reset_delay	: std_logic_vector(7 downto 0) := (others => '0');
 signal state_message : string(1 to 16);
 signal state_message2 : string(1 to 16);
 
-signal toggle_state, toggle_state_reg : std_logic := '0';
 begin
 
 	system_start : process (clk)
@@ -81,30 +84,16 @@ begin
 					else 
 						current_state <= init;
 					end if;
-					toggle_state <= '0';
-					
+
 				when Test_Mode =>
-					toggle_state_reg <= toggle_state;
-					if (sw_mode = '0') then 
-						toggle_state <= '1';
-					elsif (toggle_state = '0' and toggle_state_reg = '1') then
-						toggle_state <= '0';
+					if (mode_btn_state = "11") then 
 						current_state <= Pause_Mode;
 					else 
 						current_state <= Test_Mode;
-						toggle_state <= '0';
 					end if;
+					
 				when Pause_Mode => 
-					toggle_state_reg <= toggle_state;
-					if (sw_mode = '0') then 
-						toggle_state <= '1';
-					elsif (toggle_state = '0' and toggle_state_reg = '1') then
-						toggle_state <= '0';
-						current_state <= Test_Mode;
-					else 
-						current_state <= Pause_Mode;
-						toggle_state <= '0';
-					end if;
+					current_state <= Pause_Mode;
 
 				when PWM => 
 					PWM_en <= '1'; 
@@ -165,27 +154,37 @@ begin
 					halt_clk_en <= '1';
 
 				when Test_Mode =>
-					SRAM_R_W <= '1'; -- Set SRAM controller to Read Mode
-					SRMA_clk_en <= en;
-					o_global_reset <= '0';
-					clk_en_delay <= 49999999; -- Set counter speed to 1
-					if (toggle_state = '1') then
-						halt_clk_en <= '1';
-						state_message <= "Test Mode ~ KEY0";
-					else 
+				-- mode_btn_state btn_debounce_count
+					if (mode_btn_state = "00" and sw_mode = '1') then
+						SRAM_R_W <= '1'; -- Set SRAM controller to Read Mode
+						SRMA_clk_en <= en;
+						o_global_reset <= '0';
+						clk_en_delay <= 49999999; -- Set counter speed to 1
 						halt_clk_en <= '0';
 						state_message <= "~~ Test  Mode ~~";
+						btn_debounce_count <= 0; 
+					elsif (sw_mode = '0' and btn_debounce_count < btn_debounce_delay and mode_btn_state= "00") then -- Swich mode btn is pressed and is being debounced
+						btn_debounce_count <= btn_debounce_count + 1;
+						halt_clk_en <= '1';
+					elsif (sw_mode = '0' and btn_debounce_count = btn_debounce_delay and mode_btn_state= "00") then
+						btn_debounce_count <= 0;
+						mode_btn_state <= "01"; -- Butn is pressed and debouced
+					elsif (sw_mode = '0' and mode_btn_state= "01") then -- Btn is pressed and debounced, wait for release
+						btn_debounce_count <= 0;
+						mode_btn_state <= "01"; -- Butn is pressed and debouced
+					elsif (sw_mode = '1' and btn_debounce_count < btn_debounce_delay and mode_btn_state= "01") then -- Btn is released start debouncer
+						btn_debounce_count <= btn_debounce_count + 1;
+						halt_clk_en <= '1';
+					elsif (sw_mode = '1' and btn_debounce_count = btn_debounce_delay and mode_btn_state= "01") then
+						btn_debounce_count <= 0;
+						mode_btn_state <= "11"; -- Butn is released and debouced
+						state_message2 <= " BtnPresRel&Deb ";
 					end if;
+					
 
 				when Pause_Mode => 
 					o_global_reset <= '0';
 					halt_clk_en <= '1';
-					
-					if (toggle_state = '1') then
-						state_message <= "PausedModeKEY[0]";
-					else 
-						state_message <= "Paused Mode ~~~~";
-					end if;
 
 				when PWM =>
 					o_global_reset <= '0';
