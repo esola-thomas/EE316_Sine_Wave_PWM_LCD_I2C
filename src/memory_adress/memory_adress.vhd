@@ -20,7 +20,7 @@ architecture arch of memory_adress is
 
     signal current_address : std_logic_vector (15 downto 0);
 begin
-    process (clk, iReset) is begin
+    process (clk, iReset, clk_en) is begin
         if (iReset = '1') then  
         current_address <= (others => '0');
         elsif (rising_edge(clk) and clk_en = '1') then

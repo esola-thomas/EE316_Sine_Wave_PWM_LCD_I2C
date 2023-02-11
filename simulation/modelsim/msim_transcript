@@ -10,7 +10,41 @@
 # ** Warning: Copied C:\altera\13.0sp1\modelsim_ase\win32aloem/../modelsim.ini to modelsim.ini.
 #          Updated modelsim.ini.
 # 
-# vcom -93 -work work {D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state.vhd}
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/PWM/PWM_File.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity PWM_File
+# -- Compiling architecture behavior of PWM_File
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/I2C/i2c_master.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity i2c_master
+# -- Compiling architecture logic of i2c_master
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/I2C/i2c_controller.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity i2c_controller
+# -- Compiling architecture Behavior of i2c_controller
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/memory_adress/memory_adress.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity memory_adress
+# -- Compiling architecture arch of memory_adress
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -20,14 +54,23 @@
 # -- Loading package STD_LOGIC_UNSIGNED
 # -- Compiling entity system_state
 # -- Compiling architecture arch of system_state
-# vcom -93 -work work {D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/LCD/lcd_16x2.vhd}
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/SRAM/SRAM_Controller.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity SRAM_Controller
+# -- Compiling architecture arch of SRAM_Controller
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/LCD/lcd_16x2.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Compiling entity lcd_16x2
 # -- Compiling architecture rtl of lcd_16x2
-# vcom -93 -work work {D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/counter/counter.vhd}
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/counter/counter.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -35,7 +78,7 @@
 # -- Loading package NUMERIC_STD
 # -- Compiling entity counter
 # -- Compiling architecture arch of counter
-# vcom -93 -work work {D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd}
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd}
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
@@ -43,613 +86,137 @@
 # -- Loading package NUMERIC_STD
 # -- Compiling entity decimal_counter
 # -- Compiling architecture arch of decimal_counter
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/MUX/mux_2_input.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package std_logic_arith
+# -- Loading package STD_LOGIC_UNSIGNED
+# -- Compiling entity mux_2_input
+# -- Compiling architecture arch of mux_2_input
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/concat_zero/concat_zero_to_input.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Loading package NUMERIC_STD
+# -- Compiling entity concat_zero_to_input
+# -- Compiling architecture arch of concat_zero_to_input
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/7-segmend_display/driver_7_degemnt.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity driver_7_degemnt
+# -- Compiling architecture arch of driver_7_degemnt
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/7-segmend_display/controller_7_segment.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity controller_7_segment
+# -- Compiling architecture arch of controller_7_segment
+# vcom -93 -work work {C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/ROM/new_ROM.vhd}
+# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
+# -- Loading package STANDARD
+# -- Loading package TEXTIO
+# -- Loading package std_logic_1164
+# -- Compiling entity new_ROM
+# -- Compiling architecture SYN of new_rom
 # 
-pwd
-# D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/simulation/modelsim
-vcom -93 -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/counter/counter.vhd
+vcom -reportprogress 300 -work work C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/I2C/tb_I2C_Controller.vhd
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-vcom -93 -work work -O0 D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-vcom -reportprogress 300 -work work D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/decimal_counter_tb.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-vcom -reportprogress 300 -work work D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/Counter/counter/counter.vhd
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-do make_all.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity counter_tb
-# -- Compiling architecture arch_tb of counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity SRAM_Controller
-# -- Compiling architecture arch of SRAM_Controller
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Compiling entity system_state_tb
-# -- Compiling architecture tb of system_state_tb
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(6): (vcom-1136) Unknown identifier "std_logic_vector".
-# 
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(6): Enumeration literal '0' is not of type (error).
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(9): No feasible entries for prefix operator "not".
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(9): Type error resolving prefix expression "not" as type (error).
-# ** Warning: [2] D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(12): (vcom-1090) Possible infinite loop: Process contains no WAIT statement.
-# 
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(14): Illegal concurrent statement.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(15): Illegal concurrent statement.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(16): VHDL Compiler exiting
-# ** Error: C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-# Error in macro ./make_all.do line 6
-# C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-#     while executing
-# "vcom -reportprogress 300 -work work D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd"
-do make_all.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity counter_tb
-# -- Compiling architecture arch_tb of counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity SRAM_Controller
-# -- Compiling architecture arch of SRAM_Controller
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Compiling entity system_state_tb
-# -- Compiling architecture tb of system_state_tb
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(6): (vcom-1136) Unknown identifier "std_logic_vector".
-# 
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(6): Enumeration literal '0' is not of type (error).
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(9): No feasible entries for prefix operator "not".
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(9): Type error resolving prefix expression "not" as type (error).
-# ** Warning: [2] D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(12): (vcom-1090) Possible infinite loop: Process contains no WAIT statement.
-# 
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(13): No feasible entries for prefix operator "not".
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(13): Type error resolving prefix expression "not" as type (error).
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(14): Illegal concurrent statement.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(15): Illegal concurrent statement.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(16): VHDL Compiler exiting
-# ** Error: C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-# Error in macro ./make_all.do line 6
-# C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-#     while executing
-# "vcom -reportprogress 300 -work work D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd"
-do make_all.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity counter_tb
-# -- Compiling architecture arch_tb of counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity SRAM_Controller
-# -- Compiling architecture arch of SRAM_Controller
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Compiling entity system_state_tb
-# -- Compiling architecture tb of system_state_tb
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(6): (vcom-1136) Unknown identifier "std_logic_vector".
-# 
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(6): Enumeration literal '0' is not of type (error).
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(9): No feasible entries for prefix operator "not".
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(9): Type error resolving prefix expression "not" as type (error).
-# ** Warning: [2] D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(12): (vcom-1090) Possible infinite loop: Process contains no WAIT statement.
-# 
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(13): No feasible entries for prefix operator "not".
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(13): Type error resolving prefix expression "not" as type (error).
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(14): Illegal concurrent statement.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(15): Illegal concurrent statement.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(16): VHDL Compiler exiting
-# ** Error: C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-# Error in macro ./make_all.do line 6
-# C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-#     while executing
-# "vcom -reportprogress 300 -work work D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd"
-do make_all.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity counter_tb
-# -- Compiling architecture arch_tb of counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity SRAM_Controller
-# -- Compiling architecture arch of SRAM_Controller
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Compiling entity system_state_tb
-# -- Compiling architecture tb of system_state_tb
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(6): (vcom-1136) Unknown identifier "std_logic".
-# 
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(6): Enumeration literal '0' is not of type (error).
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(9): No feasible entries for prefix operator "not".
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(9): Type error resolving prefix expression "not" as type (error).
-# ** Warning: [2] D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(12): (vcom-1090) Possible infinite loop: Process contains no WAIT statement.
-# 
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(13): No feasible entries for prefix operator "not".
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(13): Type error resolving prefix expression "not" as type (error).
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(14): Illegal concurrent statement.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(15): Illegal concurrent statement.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(16): VHDL Compiler exiting
-# ** Error: C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-# Error in macro ./make_all.do line 6
-# C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-#     while executing
-# "vcom -reportprogress 300 -work work D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd"
-do make_all.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity counter_tb
-# -- Compiling architecture arch_tb of counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity SRAM_Controller
-# -- Compiling architecture arch of SRAM_Controller
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity system_state_tb
-# -- Compiling architecture tb of system_state_tb
-# ** Warning: [2] D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(16): (vcom-1090) Possible infinite loop: Process contains no WAIT statement.
-# 
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(18): Illegal concurrent statement.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(19): Illegal concurrent statement.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(20): VHDL Compiler exiting
-# ** Error: C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-# Error in macro ./make_all.do line 6
-# C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-#     while executing
-# "vcom -reportprogress 300 -work work D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd"
-do make_all.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity counter_tb
-# -- Compiling architecture arch_tb of counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity SRAM_Controller
-# -- Compiling architecture arch of SRAM_Controller
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity system_state_tb
-# -- Compiling architecture tb of system_state_tb
-# ** Warning: [2] D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(16): (vcom-1090) Possible infinite loop: Process contains no WAIT statement.
-# 
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(18): Illegal concurrent statement.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(19): Illegal concurrent statement.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(20): VHDL Compiler exiting
-# ** Error: C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-# Error in macro ./make_all.do line 6
-# C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-#     while executing
-# "vcom -reportprogress 300 -work work D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd"
-do make_all.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity counter_tb
-# -- Compiling architecture arch_tb of counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity SRAM_Controller
-# -- Compiling architecture arch of SRAM_Controller
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity system_state_tb
-# -- Compiling architecture tb of system_state_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity system_state
-# -- Compiling architecture arch of system_state
-vsim -voptargs=+acc work.system_state_tb
-# vsim -voptargs=+acc work.system_state_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.system_state_tb(tb)
-do make_all.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity counter_tb
-# -- Compiling architecture arch_tb of counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity SRAM_Controller
-# -- Compiling architecture arch of SRAM_Controller
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity system_state_tb
-# -- Compiling architecture tb of system_state_tb
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(11): (vcom-1177) Target type of type conversion must be type mark, not subtype indication.
-# 
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(11): Expecting a type name, found type conversion (to ieee.std_logic_1164.STD_LOGIC_VECTOR) instead.
-# ** Error: D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd(47): VHDL Compiler exiting
-# ** Error: C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-# Error in macro ./make_all.do line 6
-# C:/altera/13.0sp1/modelsim_ase/win32aloem/vcom failed.
-#     while executing
-# "vcom -reportprogress 300 -work work D:/My_DevOps/Spring_2023/EE316_Junior_Lab/EE316_Sine_Wave_PWM_LCD_I2C/src/System_State/system_state_tb.vhd"
-do make_all.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity counter_tb
-# -- Compiling architecture arch_tb of counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter_tb
-# -- Compiling architecture tb of decimal_counter_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity decimal_counter
-# -- Compiling architecture arch of decimal_counter
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity SRAM_Controller
-# -- Compiling architecture arch of SRAM_Controller
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity system_state_tb
-# -- Compiling architecture tb of system_state_tb
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity system_state
-# -- Compiling architecture arch of system_state
-vsim -voptargs=+acc work.system_state_tb
-# vsim -voptargs=+acc work.system_state_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.system_state_tb(tb)
-# Loading ieee.numeric_std(body)
-# Loading work.system_state(arch)
-vsim -voptargs=+acc work.counter_tb
-# vsim -voptargs=+acc work.counter_tb 
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.counter_tb(arch_tb)
-# Loading ieee.numeric_std(body)
-# Loading work.counter(arch)
-vsim -voptargs=+acc work.decimal_counter_tb
-# vsim -voptargs=+acc work.decimal_counter_tb 
+# -- Compiling entity tb_I2C_Controller
+# -- Compiling architecture tb of tb_I2C_Controller
+vsim -voptargs=+acc work.tb_i2c_controller
+# vsim -voptargs=+acc work.tb_i2c_controller 
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
 # Loading ieee.numeric_std(body)
-# Loading work.decimal_counter_tb(tb)
-# Loading work.decimal_counter(arch)
-# Loading work.counter(arch)
-do counter.do
-# Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Compiling entity counter_tb
-# -- Compiling architecture arch_tb of counter_tb
+# Loading work.tb_i2c_controller(tb)
+# Loading work.i2c_controller(behavior)
+# ** Error: (vsim-3732) C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/I2C/tb_I2C_Controller.vhd(38): No default binding for component instance 'DUT'.
+# 
+#    The following component port is not on the entity:
+#           address
+# 
+#         Region: /tb_i2c_controller/DUT
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.i2c_master(logic)
+# Error loading design
+vsim -voptargs=+acc work.tb_i2c_controller
+# vsim -voptargs=+acc work.tb_i2c_controller 
+# Loading std.standard
+# Loading std.textio(body)
+# Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_i2c_controller(tb)
+# Loading work.i2c_controller(behavior)
+# ** Error: (vsim-3732) C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/I2C/tb_I2C_Controller.vhd(38): No default binding for component instance 'DUT'.
+# 
+#    The following component port is not on the entity:
+#           address
+# 
+#         Region: /tb_i2c_controller/DUT
+# Loading ieee.std_logic_arith(body)
+# Loading ieee.std_logic_unsigned(body)
+# Loading work.i2c_master(logic)
+# Error loading design
+vcom -reportprogress 300 -work work C:/Users/schumae/Documents/EE316_Sine_Wave_PWM_LCD_I2C/src/I2C/tb_I2C_Controller.vhd
 # Model Technology ModelSim ALTERA vcom 10.1d Compiler 2012.11 Nov  2 2012
 # -- Loading package STANDARD
 # -- Loading package TEXTIO
 # -- Loading package std_logic_1164
 # -- Loading package NUMERIC_STD
-# -- Compiling entity counter
-# -- Compiling architecture arch of counter
-# vsim -voptargs=+acc work.counter_tb 
+# -- Compiling entity tb_I2C_Controller
+# -- Compiling architecture tb of tb_I2C_Controller
+vsim -voptargs=+acc work.tb_i2c_controller
+# vsim -voptargs=+acc work.tb_i2c_controller 
 # Loading std.standard
 # Loading std.textio(body)
 # Loading ieee.std_logic_1164(body)
+# Loading ieee.numeric_std(body)
+# Loading work.tb_i2c_controller(tb)
+# Loading work.i2c_controller(behavior)
 # Loading ieee.std_logic_arith(body)
 # Loading ieee.std_logic_unsigned(body)
-# Loading work.counter_tb(arch_tb)
-# Loading ieee.numeric_std(body)
-# Loading work.counter(arch)
-add wave -position insertpoint sim:/counter_tb/*
-quit
+# Loading work.i2c_master(logic)
+add wave -position insertpoint  \
+sim:/tb_i2c_controller/testing_clk \
+sim:/tb_i2c_controller/testing_reset \
+sim:/tb_i2c_controller/testing_i_data \
+sim:/tb_i2c_controller/testing_address \
+sim:/tb_i2c_controller/testing_sda \
+sim:/tb_i2c_controller/testing_scl
+run
+run
+run
+add wave -position insertpoint  \
+sim:/tb_i2c_controller/DUT/Inst_i2c_master/sda \
+sim:/tb_i2c_controller/DUT/Inst_i2c_master/scl \
+sim:/tb_i2c_controller/DUT/Inst_i2c_master/scl_clk \
+sim:/tb_i2c_controller/DUT/Inst_i2c_master/scl_ena \
+sim:/tb_i2c_controller/DUT/Inst_i2c_master/sda_int
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
+run
