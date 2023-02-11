@@ -7,13 +7,12 @@ entity system_state is
 port(
 	clk 	: in std_logic;
 	sw_mode : in std_logic; -- Active low
-	PWM_tog	: in std_logic;
 	iReset 	: in std_logic;
 	PWM_en 		: out std_logic;
 	clk_en 		: out std_logic;
 	direction	: out std_logic;
 	o_global_reset 	: out std_logic;
-	void			: out std_logic_vector (1 downto 0);
+	void			: out std_logic;
 	init_signal     : out std_logic;
 	SRAM_R_W		: out std_logic;
 	SRMA_clk_en		: out std_logic;
@@ -47,28 +46,17 @@ signal halt_clk_en 	: std_logic := '0';
 signal init_count	: integer := 0;
 signal clk_en_count : integer := 0;
 signal clk_en_delay : integer := 49999999;
+signal mode_btn_state : std_logic_vector (1 downto 0) := "00"; 
+signal btn_debounce_count : integer := 0;
+constant btn_debounce_delay : integer := 49999;
+
 
 -- Boot Reset delay signal
 signal boot_reset	: std_logic := '1';
 signal reset_delay	: std_logic_vector(7 downto 0) := (others => '0');
 
--- LCD data buffer
 signal state_message : string(1 to 16);
 signal state_message2 : string(1 to 16);
-
--- mode btn debouncer / endge detector registers
-signal mode_sw_signal : std_logic := '0';
-signal mode_btn_state : std_logic_vector (1 downto 0) := "00"; 
-signal btn_debounce_count : integer := 0;
-constant btn_debounce_delay : integer := 49999;
-
-signal pwm_or_pause : std_logic := '0';
--- For PWM 
-signal mode_sw_signal2 : std_logic := '0';
-signal mode_btn_state2 : std_logic_vector (1 downto 0) := "00"; 
-
--- This might nee to be removed ~~~
-signal toggle_state, toggle_state_reg : std_logic := '0';
 
 begin
 
@@ -84,52 +72,46 @@ begin
 		end if;
 	end process system_start;
 
-	system_State_machine : process (clk, iReset) begin
-		if (rising_edge (clk)) then
-			if (iReset = '1' or boot_reset = '1') then
-				current_state <= global_reset;
-			else 
-				case current_state is
-					when init =>
-					
-						if (init_state = init_complete) then
-							current_state <= Test_Mode;
-						else 
-							current_state <= init;
-						end if;
-						
-					when Test_Mode =>
-						if (mode_sw_signal = '1' and pwm_or_pause = '1') then
-							current_state <= Pause_Mode;
-						elsif (mode_sw_signal = '1' and pwm_or_pause = '0') then
-							current_state <= PWM;
-						elsif (mode_sw_signal2 = '1') then
-							current_state <= Test_Mode;
-						end if;
-					
-					when Pause_Mode => 
-						if (mode_sw_signal = '0') then
-							current_state <= Test_Mode;
-						else
-							current_state <= Pause_Mode;
-						end if;
-
-					when PWM => 
-						if (mode_sw_signal = '0') then
-							current_state <= Test_Mode;
-						else
-							current_state <= PWM;
-						end if; 
-
-					when global_reset =>
+	select_state : process (clk, iReset) begin
+		if (iReset = '1' or boot_reset = '1') then
+			current_state <= global_reset;
+		else 
+			case current_state is
+				when init =>
+				
+					if (init_state = init_complete) then
+						current_state <= Test_Mode;
+					else 
 						current_state <= init;
-				end case;			
-			end if; -- current state when not reset
+					end if;
 
+				when Test_Mode =>
+					if (mode_btn_state = "11") then 
+						current_state <= Pause_Mode;
+					else 
+						current_state <= Test_Mode;
+					end if;
+					
+				when Pause_Mode => 
+					current_state <= Pause_Mode;
+
+				when PWM => 
+					PWM_en <= '1'; 
+
+				when global_reset =>
+					current_state <= init;
+			end case;			
+		end if; 
+
+	end process select_state;
+
+
+	system_state_process : process (clk, current_state) begin
+		if (rising_edge(clk)) then  
 			case current_state is
 				when init =>
 					state_message <= "Init SRAM...    ";
-					clk_en_delay <= 100000; -- Load Values to SRAM at a faster Rate
+					clk_en_delay <= 80000; -- Load Values to SRAM at a faster Rate
 					case init_state is 
 						when init_reset => -- Send global reset signal for 10 clk cycles
 							if (init_count < 49999999) then 
@@ -170,93 +152,48 @@ begin
 					init_state <= init_reset;
 					o_global_reset <= '1';
 					halt_clk_en <= '1';
-					btn_debounce_count <= 0;
-					mode_btn_state <= "00";
-					mode_sw_signal <= '0';
 
 				when Test_Mode =>
-					SRAM_R_W <= '1'; -- Set SRAM controller to Read Mode
-					SRMA_clk_en <= en;
-					o_global_reset <= '0';
-					clk_en_delay <= 49999999; -- Set counter speed to 1
-					state_message <= "~~~Test__Mode~~~";
-
-					if (sw_mode = '0') then
-						pwm_or_pause <= '1';
-					elsif (PWM_tog = '0') then
-						pwm_or_pause <= '0';
-					end if;
-
-					if (mode_btn_state = "00" and sw_mode = '1' and PWM_tog = '1') then
+				-- mode_btn_state btn_debounce_count
+					if (mode_btn_state = "00" and sw_mode = '1') then
+						SRAM_R_W <= '1'; -- Set SRAM controller to Read Mode
+						SRMA_clk_en <= en;
+						o_global_reset <= '0';
+						clk_en_delay <= 49999999; -- Set counter speed to 1
 						halt_clk_en <= '0';
-						state_message2 <= "KEY[1] not press"; 
-					elsif ((sw_mode = '0' or PWM_tog = '0') and btn_debounce_count < btn_debounce_delay and mode_btn_state= "00") then -- Swich mode btn is pressed and is being debounced
+						state_message <= "~~ Test  Mode ~~";
+						btn_debounce_count <= 0; 
+					elsif (sw_mode = '0' and btn_debounce_count < btn_debounce_delay and mode_btn_state= "00") then -- Swich mode btn is pressed and is being debounced
 						btn_debounce_count <= btn_debounce_count + 1;
 						halt_clk_en <= '1';
-					elsif ((sw_mode = '0' or PWM_tog = '0') and btn_debounce_count = btn_debounce_delay and mode_btn_state= "00") then
-						btn_debounce_count <= 0;
-						mode_btn_state <= "01"; -- Butn is pressed and debouced
-					elsif ((sw_mode = '0' or PWM_tog = '0') and mode_btn_state= "01") then -- Btn is pressed and debounced, wait for release
-						btn_debounce_count <= 0;
-						mode_btn_state <= "01"; -- Butn is pressed and debouced
-						state_message2 <= "KEY[1] press&deb";
-					elsif (sw_mode = '1' and PWM_tog = '1') then
-						mode_btn_state <= "11";
-						mode_sw_signal <= '1';
-					else 
-						mode_btn_state <= "00";
-						btn_debounce_count <= 0;
-					end if;
-
-				when Pause_Mode => 
-					if (mode_btn_state = "11" and sw_mode = '1') then
-						halt_clk_en <= '1';
-						state_message <= "PAUSE MODE      "; 
-						state_message2 <= "KEY[1] not press"; 
-					elsif (sw_mode = '0' and btn_debounce_count < btn_debounce_delay and mode_btn_state= "11") then -- Swich mode btn is pressed and is being debounced
-						btn_debounce_count <= btn_debounce_count + 1;
-						halt_clk_en <= '1';
-					elsif (sw_mode = '0' and btn_debounce_count = btn_debounce_delay and mode_btn_state= "11") then
+					elsif (sw_mode = '0' and btn_debounce_count = btn_debounce_delay and mode_btn_state= "00") then
 						btn_debounce_count <= 0;
 						mode_btn_state <= "01"; -- Butn is pressed and debouced
 					elsif (sw_mode = '0' and mode_btn_state= "01") then -- Btn is pressed and debounced, wait for release
 						btn_debounce_count <= 0;
 						mode_btn_state <= "01"; -- Butn is pressed and debouced
-						state_message2 <= "KEY[1] press&deb"; 
-					elsif (sw_mode = '1') then
-						mode_btn_state <= "00";
-						mode_sw_signal <= '0';
-					else 
-						mode_btn_state <= "00";
-						btn_debounce_count <= 0;
-					end if;
-
-				when PWM =>
-					if (mode_btn_state = "11" and PWM_tog = '1') then
-						halt_clk_en <= '1';
-						state_message <= "PWM   MODE      "; 
-						state_message2 <= "KEY[1] not press"; 
-					elsif (PWM_tog = '0' and btn_debounce_count < btn_debounce_delay and mode_btn_state= "11") then -- Swich mode btn is pressed and is being debounced
+					elsif (sw_mode = '1' and btn_debounce_count < btn_debounce_delay and mode_btn_state= "01") then -- Btn is released start debouncer
 						btn_debounce_count <= btn_debounce_count + 1;
 						halt_clk_en <= '1';
-					elsif (PWM_tog = '0' and btn_debounce_count = btn_debounce_delay and mode_btn_state= "11") then
+					elsif (sw_mode = '1' and btn_debounce_count = btn_debounce_delay and mode_btn_state= "01") then
 						btn_debounce_count <= 0;
-						mode_btn_state <= "01"; -- Butn is pressed and debouced
-					elsif (PWM_tog = '0' and mode_btn_state= "01") then -- Btn is pressed and debounced, wait for release
-						btn_debounce_count <= 0;
-						mode_btn_state <= "01"; -- Butn is pressed and debouced
-						state_message2 <= "KEY[1] press&deb"; 
-					elsif (PWM_tog = '1') then
-						mode_btn_state <= "00";
-						mode_sw_signal <= '0';
-					else 
-						mode_btn_state <= "00";
-						btn_debounce_count <= 0;
+						mode_btn_state <= "11"; -- Butn is released and debouced
+						state_message2 <= " BtnPresRel&Deb ";
 					end if;
+					
+
+				when Pause_Mode => 
+					o_global_reset <= '0';
+					halt_clk_en <= '1';
+
+				when PWM =>
+					o_global_reset <= '0';
+					halt_clk_en <= '0';
+					state_message <= "PWM Generation  ";
 
 			end case;
 		end if;
-	end process system_State_machine;
+	end process system_state_process;
 
 	clk_enabler : process (clk) begin
 		if rising_edge(clk) then
@@ -312,5 +249,4 @@ begin
 
 	direction <= '1';
 	init_signal <= '0' when (current_state = init) else '1';
-	void <= '1' & mode_sw_signal;
 end;
