@@ -1,3 +1,5 @@
+-- Lines 85-88 have hard coded values for i_data
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.all;
 USE ieee.numeric_std.all;
@@ -81,10 +83,10 @@ begin
             when 6  => data_wr <= X"00";
             when 7  => data_wr <= X"79";
             when 8  => data_wr <= X"00";
-            when 9  => data_wr <= X"0"&iData(15 downto 12);
-            when 10 => data_wr <= X"0"&iData(11 downto 8);
-            when 11 => data_wr <= X"0"&iData(7 downto 4);
-            when 12 => data_wr <= X"0"&iData(3 downto 0);
+            when 9  => data_wr <= X"41";-- X"0"&iData(15 downto 12);
+            when 10 => data_wr <= X"42";-- X"0"&iData(11 downto 8);
+            when 11 => data_wr <= X"43";-- X"0"&iData(7 downto 4);
+            when 12 => data_wr <= X"44";-- X"0"&iData(3 downto 0);
             when others => data_wr <= X"76";
         end case;
     end if;
@@ -110,17 +112,11 @@ begin
         case state is
 				--Start state
             when start =>
---					IF Cont /= X"00000" THEN
---						Cont <= Cont -1;
---						reset_n <= '0';
---						state <= start;
---						ena <='0';
---						else
+
                     ena <= '1';                 --initiate the transaction
                     addr <= Sub_Addr;           --set the address of the subordinate
                     rw <= '0';                  --command 0 allows it a write     
                     state <= ready;
---					end if;
 
 				--Ready State
             when ready => 
@@ -154,5 +150,8 @@ begin
         end case;
     end if;
 end process;
+
+reset_n <= not reset;
+
 end Behavior;
 
