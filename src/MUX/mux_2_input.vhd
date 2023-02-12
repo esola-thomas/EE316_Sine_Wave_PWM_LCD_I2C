@@ -10,7 +10,8 @@ entity mux_2_input is
         iData0  : in std_logic_vector(bus_with-1 downto 0);
         iData1  : in std_logic_vector(bus_with-1 downto 0);
         sel     : in std_logic;
-        oData   : out std_logic_vector(bus_with-1 downto 0)
+        oData   : out std_logic_vector(bus_with-1 downto 0);
+		  oData2	 : out std_logic_vector(7 downto 0)
     );
 end mux_2_input;
 
@@ -18,4 +19,6 @@ architecture arch of mux_2_input is
 begin
     oData <=    iData0 when sel = '0' else
                 iData1 when sel = '1';
+	oData2 <=	iData0(7 downto 0) when sel = '0' else
+                iData1(7 downto 0) when sel = '1';
 end arch;

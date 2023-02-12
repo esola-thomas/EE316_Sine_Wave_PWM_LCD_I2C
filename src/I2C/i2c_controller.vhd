@@ -38,7 +38,7 @@ END component;
 type state_type is(start, ready, data_valid, busy_high, repeat);
 signal state        : state_type;
 signal busy         : std_logic;
-signal reset_n      : std_logic;
+signal reset_n      : std_logic := '1';
 signal ena          : std_logic;
 signal addr         : std_logic_vector(6 downto 0);
 signal rw           : std_logic;
@@ -95,7 +95,7 @@ begin
     if rising_edge(clk) then
     
         iData <= i_data;
-        Sub_Addr <= address;
+        Sub_Addr <= "1110001"; -- X"71"
     
     end if;
 end process;

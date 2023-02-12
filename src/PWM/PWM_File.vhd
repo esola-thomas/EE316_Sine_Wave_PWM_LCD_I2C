@@ -3,11 +3,12 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 entity PWM_File is
-    generic(N: integer := 16); -- number of bits of PWM counter
+    generic(
+	 N: integer := 16; 
+	 Max_Number : integer := 65534); -- number of bits of PWM counter
     port(
         clk             : in std_logic;
         reset           : in std_logic;
-        Max_Number      : in std_logic_vector((N- 1) downto 0);
         sram_data       : in std_logic_vector((N- 1) downto 0);
         enable          : in std_logic;
         PWM_Output      : out std_logic--;
@@ -28,7 +29,7 @@ begin
     begin
 	 
 	 	sram_info	    <= unsigned(sram_data); 
-		PWM_COUNTER_MAX <= unsigned(Max_Number);
+		PWM_COUNTER_MAX <= to_unsigned(Max_Number, 16);
 
 	
         if reset = '1' then

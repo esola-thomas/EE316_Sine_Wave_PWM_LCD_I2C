@@ -20,51 +20,56 @@ applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 280 128)
-	(text "mux_2_input" (rect 5 0 56 12)(font "Arial" ))
+	(rect 16 16 240 128)
+	(text "PWM_File" (rect 5 0 48 12)(font "Arial" ))
 	(text "inst" (rect 8 96 20 108)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "iData0[bus_with-1..0]" (rect 0 0 80 12)(font "Arial" ))
-		(text "iData0[bus_with-1..0]" (rect 21 27 101 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 3))
+		(text "clk" (rect 0 0 10 12)(font "Arial" ))
+		(text "clk" (rect 21 27 31 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
 	)
 	(port
 		(pt 0 48)
 		(input)
-		(text "iData1[bus_with-1..0]" (rect 0 0 79 12)(font "Arial" ))
-		(text "iData1[bus_with-1..0]" (rect 21 43 100 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 3))
+		(text "reset" (rect 0 0 20 12)(font "Arial" ))
+		(text "reset" (rect 21 43 41 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 1))
 	)
 	(port
 		(pt 0 64)
 		(input)
-		(text "sel" (rect 0 0 10 12)(font "Arial" ))
-		(text "sel" (rect 21 59 31 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64)(line_width 1))
+		(text "sram_data[n-1..0]" (rect 0 0 69 12)(font "Arial" ))
+		(text "sram_data[n-1..0]" (rect 21 59 90 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
 	)
 	(port
-		(pt 264 32)
-		(output)
-		(text "oData[bus_with-1..0]" (rect 0 0 79 12)(font "Arial" ))
-		(text "oData[bus_with-1..0]" (rect 164 27 243 39)(font "Arial" ))
-		(line (pt 264 32)(pt 248 32)(line_width 3))
+		(pt 0 80)
+		(input)
+		(text "enable" (rect 0 0 24 12)(font "Arial" ))
+		(text "enable" (rect 21 75 45 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 1))
 	)
 	(port
-		(pt 264 48)
+		(pt 224 32)
 		(output)
-		(text "oData2[7..0]" (rect 0 0 48 12)(font "Arial" ))
-		(text "oData2[7..0]" (rect 195 43 243 55)(font "Arial" ))
-		(line (pt 264 48)(pt 248 48)(line_width 3))
+		(text "PWM_Output" (rect 0 0 56 12)(font "Arial" ))
+		(text "PWM_Output" (rect 147 27 203 39)(font "Arial" ))
+		(line (pt 224 32)(pt 208 32)(line_width 1))
 	)
 	(parameter
-		"bus_with"
+		"N"
 		"16"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"Max_Number"
+		"65534"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 248 96)(line_width 1))
+		(rectangle (rect 16 16 208 96)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 280 -64 380 16))
+	(annotation_block (parameter)(rect 240 -64 340 16))
 )

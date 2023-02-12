@@ -447,7 +447,7 @@ applicable agreement for further details.
 )
 (pin
 	(bidir)
-	(rect 1264 200 1440 216)
+	(rect 1272 200 1448 216)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
 	(text "GPIO[0]" (rect 90 0 130 12)(font "Arial" ))
 	(pt 0 8)
@@ -461,11 +461,11 @@ applicable agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1440 200 1504 216))
+	(annotation_block (location)(rect 1448 200 1512 216))
 )
 (pin
 	(bidir)
-	(rect 1264 216 1440 232)
+	(rect 1272 216 1448 232)
 	(text "BIDIR" (rect 1 0 25 10)(font "Arial" (font_size 6)))
 	(text "GPIO[1]" (rect 90 0 130 12)(font "Arial" ))
 	(pt 0 8)
@@ -479,7 +479,7 @@ applicable agreement for further details.
 		(line (pt 52 8)(pt 56 12))
 	)
 	(text "VCC" (rect 4 7 24 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 1440 216 1504 232))
+	(annotation_block (location)(rect 1448 216 1512 232))
 )
 (symbol
 	(rect -56 416 -8 448)
@@ -682,134 +682,6 @@ applicable agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 216 128))
 	)
-)
-(symbol
-	(rect 704 416 968 528)
-	(text "mux_2_input" (rect 5 0 67 12)(font "Arial" ))
-	(text "mem_adress_mux" (rect 8 96 98 108)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "iData0[bus_with-1..0]" (rect 0 0 103 12)(font "Arial" ))
-		(text "iData0[bus_with-1..0]" (rect 21 27 124 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 3))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "iData1[bus_with-1..0]" (rect 0 0 103 12)(font "Arial" ))
-		(text "iData1[bus_with-1..0]" (rect 21 43 124 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 3))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "sel" (rect 0 0 14 12)(font "Arial" ))
-		(text "sel" (rect 21 59 35 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 264 32)
-		(output)
-		(text "oData[bus_with-1..0]" (rect 0 0 101 12)(font "Arial" ))
-		(text "oData[bus_with-1..0]" (rect 158 27 259 39)(font "Arial" ))
-		(line (pt 264 32)(pt 248 32)(line_width 3))
-	)
-	(parameter
-		"bus_with"
-		"20"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 248 96))
-	)
-	(annotation_block (parameter)(rect 704 384 886 412))
-)
-(symbol
-	(rect 472 432 656 544)
-	(text "decimal_counter" (rect 5 0 85 12)(font "Arial" ))
-	(text "decimal_inst" (rect 8 96 69 108)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "clk" (rect 0 0 14 12)(font "Arial" ))
-		(text "clk" (rect 21 27 35 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "ireset" (rect 0 0 27 12)(font "Arial" ))
-		(text "ireset" (rect 21 43 48 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "direction" (rect 0 0 41 12)(font "Arial" ))
-		(text "direction" (rect 21 59 62 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 184 32)
-		(output)
-		(text "i[31..0]" (rect 0 0 34 12)(font "Arial" ))
-		(text "i[31..0]" (rect 135 27 169 39)(font "Arial" ))
-		(line (pt 184 32)(pt 168 32)(line_width 3))
-	)
-	(port
-		(pt 184 48)
-		(output)
-		(text "d[31..0]" (rect 0 0 37 12)(font "Arial" ))
-		(text "d[31..0]" (rect 132 43 169 55)(font "Arial" ))
-		(line (pt 184 48)(pt 168 48)(line_width 3))
-	)
-	(port
-		(pt 184 64)
-		(output)
-		(text "MSB_8[19..0]" (rect 0 0 66 12)(font "Arial" ))
-		(text "MSB_8[19..0]" (rect 108 59 174 71)(font "Arial" ))
-		(line (pt 184 64)(pt 168 64)(line_width 3))
-	)
-	(parameter
-		"count_step_integer"
-		"1"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"count_step_decimal"
-		"25"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"count_max_integer"
-		"10"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"count_max_decimal"
-		"100"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"bus_size_integer"
-		"32"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"bus_size_decimal"
-		"32"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"count_delay"
-		"3"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 168 96))
-	)
-	(annotation_block (parameter)(rect 408 320 643 432))
 )
 (symbol
 	(rect 688 200 904 328)
@@ -1049,49 +921,6 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 1096 176 1256 288)
-	(text "i2c_controller" (rect 5 0 69 12)(font "Arial" ))
-	(text "I2C" (rect 8 96 25 108)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "clk" (rect 0 0 14 12)(font "Arial" ))
-		(text "clk" (rect 21 27 35 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "reset" (rect 0 0 24 12)(font "Arial" ))
-		(text "reset" (rect 21 43 45 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "i_data[15..0]" (rect 0 0 61 12)(font "Arial" ))
-		(text "i_data[15..0]" (rect 21 59 82 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64)(line_width 3))
-	)
-	(port
-		(pt 160 32)
-		(bidir)
-		(text "sda" (rect 0 0 17 12)(font "Arial" ))
-		(text "sda" (rect 125 27 142 39)(font "Arial" ))
-		(line (pt 160 32)(pt 144 32))
-	)
-	(port
-		(pt 160 48)
-		(bidir)
-		(text "scl" (rect 0 0 14 12)(font "Arial" ))
-		(text "scl" (rect 129 43 143 55)(font "Arial" ))
-		(line (pt 160 48)(pt 144 48))
-	)
-	(drawing
-		(rectangle (rect 16 16 144 96))
-	)
-)
-(symbol
 	(rect 1096 24 1336 168)
 	(text "PWM_File" (rect 5 0 54 12)(font "Arial" ))
 	(text "PWM_inst" (rect 8 128 57 140)(font "Arial" ))
@@ -1190,49 +1019,49 @@ applicable agreement for further details.
 		(pt 256 48)
 		(output)
 		(text "oMemAdress[19..0]" (rect 0 0 95 12)(font "Arial" ))
-		(text "oMemAdress[19..0]" (rect 155 43 235 55)(font "Arial" ))
+		(text "oMemAdress[19..0]" (rect 155 43 250 55)(font "Arial" ))
 		(line (pt 256 48)(pt 240 48)(line_width 3))
 	)
 	(port
 		(pt 256 64)
 		(output)
 		(text "oCE" (rect 0 0 21 12)(font "Arial" ))
-		(text "oCE" (rect 218 59 235 71)(font "Arial" ))
+		(text "oCE" (rect 218 59 239 71)(font "Arial" ))
 		(line (pt 256 64)(pt 240 64))
 	)
 	(port
 		(pt 256 80)
 		(output)
 		(text "oUB" (rect 0 0 21 12)(font "Arial" ))
-		(text "oUB" (rect 218 75 235 87)(font "Arial" ))
+		(text "oUB" (rect 218 75 239 87)(font "Arial" ))
 		(line (pt 256 80)(pt 240 80))
 	)
 	(port
 		(pt 256 96)
 		(output)
 		(text "oLB" (rect 0 0 18 12)(font "Arial" ))
-		(text "oLB" (rect 220 91 235 103)(font "Arial" ))
+		(text "oLB" (rect 220 91 238 103)(font "Arial" ))
 		(line (pt 256 96)(pt 240 96))
 	)
 	(port
 		(pt 256 112)
 		(output)
 		(text "oWE" (rect 0 0 23 12)(font "Arial" ))
-		(text "oWE" (rect 216 107 235 119)(font "Arial" ))
+		(text "oWE" (rect 216 107 239 119)(font "Arial" ))
 		(line (pt 256 112)(pt 240 112))
 	)
 	(port
 		(pt 256 128)
 		(output)
 		(text "oOE" (rect 0 0 21 12)(font "Arial" ))
-		(text "oOE" (rect 218 123 235 135)(font "Arial" ))
+		(text "oOE" (rect 218 123 239 135)(font "Arial" ))
 		(line (pt 256 128)(pt 240 128))
 	)
 	(port
 		(pt 256 144)
 		(output)
 		(text "SRAM_out[15..0]" (rect 0 0 83 12)(font "Arial" ))
-		(text "SRAM_out[15..0]" (rect 165 139 235 151)(font "Arial" ))
+		(text "SRAM_out[15..0]" (rect 165 139 248 151)(font "Arial" ))
 		(line (pt 256 144)(pt 240 144)(line_width 3))
 	)
 	(port
@@ -1245,6 +1074,191 @@ applicable agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 240 160))
 	)
+)
+(symbol
+	(rect 1096 176 1264 288)
+	(text "i2c_controller" (rect 5 0 69 12)(font "Arial" ))
+	(text "inst" (rect 8 96 25 108)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "reset" (rect 0 0 24 12)(font "Arial" ))
+		(text "reset" (rect 21 43 45 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "i_data[15..0]" (rect 0 0 61 12)(font "Arial" ))
+		(text "i_data[15..0]" (rect 21 59 82 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "address[6..0]" (rect 0 0 64 12)(font "Arial" ))
+		(text "address[6..0]" (rect 21 75 85 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 168 32)
+		(bidir)
+		(text "sda" (rect 0 0 17 12)(font "Arial" ))
+		(text "sda" (rect 133 27 150 39)(font "Arial" ))
+		(line (pt 168 32)(pt 152 32))
+	)
+	(port
+		(pt 168 48)
+		(bidir)
+		(text "scl" (rect 0 0 14 12)(font "Arial" ))
+		(text "scl" (rect 137 43 151 55)(font "Arial" ))
+		(line (pt 168 48)(pt 152 48))
+	)
+	(drawing
+		(rectangle (rect 16 16 152 96))
+	)
+)
+(symbol
+	(rect 472 432 656 544)
+	(text "decimal_counter" (rect 5 0 85 12)(font "Arial" ))
+	(text "decimal_inst" (rect 8 96 69 108)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "ireset" (rect 0 0 27 12)(font "Arial" ))
+		(text "ireset" (rect 21 43 48 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "direction" (rect 0 0 41 12)(font "Arial" ))
+		(text "direction" (rect 21 59 62 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 184 32)
+		(output)
+		(text "i[31..0]" (rect 0 0 34 12)(font "Arial" ))
+		(text "i[31..0]" (rect 135 27 169 39)(font "Arial" ))
+		(line (pt 184 32)(pt 168 32)(line_width 3))
+	)
+	(port
+		(pt 184 48)
+		(output)
+		(text "d[31..0]" (rect 0 0 37 12)(font "Arial" ))
+		(text "d[31..0]" (rect 132 43 169 55)(font "Arial" ))
+		(line (pt 184 48)(pt 168 48)(line_width 3))
+	)
+	(port
+		(pt 184 64)
+		(output)
+		(text "MSB_8[19..0]" (rect 0 0 66 12)(font "Arial" ))
+		(text "MSB_8[19..0]" (rect 108 59 174 71)(font "Arial" ))
+		(line (pt 184 64)(pt 168 64)(line_width 3))
+	)
+	(parameter
+		"count_step_integer"
+		"5153"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"count_step_decimal"
+		"9607552"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"count_max_integer"
+		"4294967295"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"count_max_decimal"
+		"10000000"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"bus_size_integer"
+		"32"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"bus_size_decimal"
+		"32"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"count_delay"
+		"49999"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 168 96))
+	)
+	(annotation_block (parameter)(rect 408 320 672 432))
+)
+(symbol
+	(rect 704 416 968 528)
+	(text "mux_2_input" (rect 5 0 67 12)(font "Arial" ))
+	(text "addr_mux" (rect 8 96 56 108)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "iData0[bus_with-1..0]" (rect 0 0 103 12)(font "Arial" ))
+		(text "iData0[bus_with-1..0]" (rect 21 27 124 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "iData1[bus_with-1..0]" (rect 0 0 103 12)(font "Arial" ))
+		(text "iData1[bus_with-1..0]" (rect 21 43 124 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "sel" (rect 0 0 14 12)(font "Arial" ))
+		(text "sel" (rect 21 59 35 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 264 32)
+		(output)
+		(text "oData[bus_with-1..0]" (rect 0 0 101 12)(font "Arial" ))
+		(text "oData[bus_with-1..0]" (rect 158 27 259 39)(font "Arial" ))
+		(line (pt 264 32)(pt 248 32)(line_width 3))
+	)
+	(port
+		(pt 264 48)
+		(output)
+		(text "oData2[7..0]" (rect 0 0 61 12)(font "Arial" ))
+		(text "oData2[7..0]" (rect 192 43 253 55)(font "Arial" ))
+		(line (pt 264 48)(pt 248 48)(line_width 3))
+	)
+	(parameter
+		"bus_with"
+		"20"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 248 96))
+	)
+	(annotation_block (parameter)(rect 704 384 886 412))
 )
 (connector
 	(pt 408 232)
@@ -1401,11 +1415,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 680 496)
-	(pt 656 496)
-	(bus)
-)
-(connector
 	(pt 392 328)
 	(pt 392 464)
 )
@@ -1495,18 +1504,8 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 704 464)
-	(pt 696 464)
-	(bus)
-)
-(connector
 	(pt 696 344)
 	(pt 696 448)
-	(bus)
-)
-(connector
-	(pt 696 448)
-	(pt 696 464)
 	(bus)
 )
 (connector
@@ -1662,11 +1661,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 1032 328)
-	(pt 1088 328)
-	(bus)
-)
-(connector
 	(pt 1032 48)
 	(pt 1032 328)
 	(bus)
@@ -1700,14 +1694,6 @@ applicable agreement for further details.
 	(pt 1320 344)
 	(pt 1328 344)
 	(bus)
-)
-(connector
-	(pt 1264 208)
-	(pt 1256 208)
-)
-(connector
-	(pt 1264 224)
-	(pt 1256 224)
 )
 (connector
 	(pt 1336 56)
@@ -1831,6 +1817,44 @@ applicable agreement for further details.
 	(pt 1080 72)
 	(pt 1080 224)
 )
+(connector
+	(pt 1264 208)
+	(pt 1272 208)
+)
+(connector
+	(pt 1264 224)
+	(pt 1272 224)
+)
+(connector
+	(pt 704 464)
+	(pt 680 464)
+	(bus)
+)
+(connector
+	(pt 656 496)
+	(pt 680 496)
+	(bus)
+)
+(connector
+	(pt 680 464)
+	(pt 680 496)
+	(bus)
+)
+(connector
+	(pt 968 464)
+	(pt 1048 464)
+	(bus)
+)
+(connector
+	(pt 1048 464)
+	(pt 1048 328)
+	(bus)
+)
+(connector
+	(pt 1088 328)
+	(pt 1048 328)
+	(bus)
+)
 (junction (pt 16 368))
 (junction (pt 392 328))
 (junction (pt 376 416))
@@ -1840,7 +1864,6 @@ applicable agreement for further details.
 (junction (pt 392 464))
 (junction (pt 376 480))
 (junction (pt 680 152))
-(junction (pt 696 448))
 (junction (pt 8 432))
 (junction (pt 16 328))
 (junction (pt 24 416))

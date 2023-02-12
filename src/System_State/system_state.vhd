@@ -173,6 +173,7 @@ begin
 					btn_debounce_count <= 0;
 					mode_btn_state <= "00";
 					mode_sw_signal <= '0';
+					PWM_en <= '1';
 
 				when Test_Mode =>
 					SRAM_R_W <= '1'; -- Set SRAM controller to Read Mode
@@ -210,10 +211,12 @@ begin
 
 				when Pause_Mode => 
 					if (mode_btn_state = "11" and sw_mode = '1') then
+						PWM_en <= '1';
 						halt_clk_en <= '1';
 						state_message <= "PAUSE MODE      "; 
 						state_message2 <= "KEY[1] not press"; 
 					elsif (sw_mode = '0' and btn_debounce_count < btn_debounce_delay and mode_btn_state= "11") then -- Swich mode btn is pressed and is being debounced
+						PWM_en <= '0';
 						btn_debounce_count <= btn_debounce_count + 1;
 						halt_clk_en <= '1';
 					elsif (sw_mode = '0' and btn_debounce_count = btn_debounce_delay and mode_btn_state= "11") then
