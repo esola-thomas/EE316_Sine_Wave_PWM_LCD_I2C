@@ -30,7 +30,7 @@ component i2c_master is
     rw        : IN     STD_LOGIC;                    --'0' is write, '1' is read
     data_wr   : IN     STD_LOGIC_VECTOR(7 DOWNTO 0); --data to write to slave
     busy      : OUT    STD_LOGIC;                    --indicates transaction in progress
-    data_rd   : OUT    STD_LOGIC_VECTOR(15 DOWNTO 0); --data read from slave
+    data_rd   : OUT    STD_LOGIC_VECTOR(7 DOWNTO 0); --data read from slave
     ack_error : BUFFER STD_LOGIC;                    --flag if improper acknowledge from slave
     sda       : INOUT  STD_LOGIC;                    --serial data output of i2c bus
     scl       : INOUT  STD_LOGIC);                   --serial clock output of i2c bus                 
@@ -40,13 +40,12 @@ END component;
 type state_type is(start, ready, data_valid, busy_high, repeat);
 signal state        : state_type;
 signal busy         : std_logic;
-signal reset_n      : std_logic := '1';
+signal reset_n      : std_logic;
 signal ena          : std_logic;
 signal addr         : std_logic_vector(6 downto 0);
 signal rw           : std_logic;
-signal data_wr      : std_logic_vector(7 downto 0);
+signal data_info    : std_logic_vector(7 downto 0);
 signal byteSel      : integer range 0 to 12:= 0;
---signal Cont 		  : unsigned (19 downto 0):=X"03FFF";
 signal iData 		  : std_logic_vector(15 downto 0);
 signal Sub_Addr     : std_logic_vector(6 downto 0);  
 
@@ -62,7 +61,7 @@ Inst_i2c_master: i2c_master
     ena       => ena,                    
     addr      => addr, 
     rw        => rw,                 
-    data_wr   => data_wr,
+    data_wr   => data_info,
     busy      => busy,                  
     data_rd   => open,
     ack_error => open,                  
@@ -70,24 +69,24 @@ Inst_i2c_master: i2c_master
     scl       => scl                  
 );
 
-process(byteSel, clk, i_data )
+process(byteSel, i_data, clk )
 begin   
     if rising_edge(clk) then
         case byteSel is
-            when 0  => data_wr <= X"76";
-            when 1  => data_wr <= X"76";
-            when 2  => data_wr <= X"76";
-            when 3  => data_wr <= X"7A";
-            when 4  => data_wr <= X"FF";
-            when 5  => data_wr <= X"77";
-            when 6  => data_wr <= X"00";
-            when 7  => data_wr <= X"79";
-            when 8  => data_wr <= X"00";
-            when 9  => data_wr <= X"41";-- X"0"&iData(15 downto 12);
-            when 10 => data_wr <= X"42";-- X"0"&iData(11 downto 8);
-            when 11 => data_wr <= X"43";-- X"0"&iData(7 downto 4);
-            when 12 => data_wr <= X"44";-- X"0"&iData(3 downto 0);
-            when others => data_wr <= X"76";
+            when 0  => data_info <= X"76";
+            when 1  => data_info <= X"76";
+            when 2  => data_info <= X"76";
+            when 3  => data_info <= X"7A";
+            when 4  => data_info <= X"FF";
+            when 5  => data_info <= X"77";
+            when 6  => data_info <= X"00";
+            when 7  => data_info <= X"79";
+            when 8  => data_info <= X"00";
+            when 9  => data_info <=X"0"&iData(15 downto 12);
+            when 10 => data_info <=X"0"&iData(11 downto 8);
+            when 11 => data_info <=X"0"&iData(7 downto 4);
+            when 12 => data_info <=X"0"&iData(3 downto 0);
+            when others => data_info <= X"76";
         end case;
     end if;
 end process;
@@ -150,8 +149,6 @@ begin
         end case;
     end if;
 end process;
-
 reset_n <= not reset;
-
 end Behavior;
 

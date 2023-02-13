@@ -6,7 +6,7 @@ entity decimal_counter is
 	generic(
 		count_step_integer 	: integer := 1; 	-- Whole part of delay 
 		count_step_decimal 	: integer := 25;    -- Delay part of delay (.25) <= Based on size
-		count_max_integer 	: integer := 10;
+		count_max_integer 	: unsigned (31 downto 0) := X"000000FF";
 		count_max_decimal	: integer := 100;
         bus_size_integer    : integer := 32;
         bus_size_decimal    : integer := 32;
@@ -26,7 +26,7 @@ architecture arch of decimal_counter is
 	component counter
     generic(
         count_size 			: integer; -- Output bus size
-        max_count			: integer;
+        max_count			: unsigned (31 downto 0);
         count_step_size 	: integer;
         count_delay			: integer
     );
@@ -60,6 +60,11 @@ begin
 
     i <= to_integer(unsigned(int_count_out));
     d <= to_integer(unsigned(deci_count_out));
-    MSB_8 (7 downto 0) <= int_count_out (bus_size_integer-1 downto bus_size_integer-8);     -- <= Just for this project
-    MSB_8 (19 downto 8) <= (others => '0');                 -- <= Just for this project
+
+    update_bus : process (clk) is begin
+        if (rising_edge(clk)) then 
+            MSB_8 (7 downto 0) <= int_count_out (bus_size_integer-1 downto bus_size_integer-8);     -- <= Just for this project
+            MSB_8 (19 downto 8) <= (others => '0');                 -- <= Just for this project
+        end if;
+    end process update_bus;
 end arch;

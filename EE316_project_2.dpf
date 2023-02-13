@@ -2,6 +2,12 @@
 
 <pin_planner>
 	<pin_info>
+		<pin name="GPIO[2]" source="Pin Planner" >
+		</pin>
+		<pin name="GPIO[1]" source="Pin Planner" >
+		</pin>
+		<pin name="GPIO[0]" source="Pin Planner" >
+		</pin>
 		<pin name="HSMC_CLKIN_P1" source="Assignments" diff_pair_node="HSMC_CLKIN_N1" >
 		</pin>
 		<pin name="HSMC_CLKIN_P2" source="Assignments" diff_pair_node="HSMC_CLKIN_N2" >

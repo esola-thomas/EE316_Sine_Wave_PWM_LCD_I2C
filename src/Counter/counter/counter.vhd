@@ -5,7 +5,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity counter is
 	generic(
 		count_size 			: integer := 8; -- Output bus size
-		max_count			: integer := 15;
+		max_count			: unsigned (31 downto 0) := X"000000FF";
 		count_step_size 	: integer := 1;
 		count_delay			: integer := 49999999 -- Clk cycles delay until next count
 	);
@@ -24,7 +24,7 @@ architecture arch of counter is
 	signal new_carry_in : std_logic := '0'; -- When carry data was read
 	signal en : std_logic := '0';
 	signal clk_en_count : integer := 0;
-	signal count_int_reg: integer := 0;
+	signal count_int_reg: unsigned (31 downto 0) := (others => '0');
 
 begin
 
@@ -42,7 +42,7 @@ begin
 	
 	main_count : process (clk, en) begin
 		if (ireset = '1') then -- Possible implementation, add if statement to reset to max or min value depending on the direction signal
-			count_int_reg <= 0;
+			count_int_reg <= (others => '0');
 			carry_out <= '0';
 		elsif (carry_in = '1' and new_carry_in = '0') then
 			new_carry_in <= '1';
@@ -54,25 +54,25 @@ begin
 		elsif (rising_edge(clk) and en = '1') then
 			new_carry_in <= '0';
 			if (direction = '1') then -- Count up
-				if (count_int_reg + count_step_size >= max_count) then
-					count_int_reg <= count_int_reg + count_step_size - max_count;
+				if (count_int_reg + unsigned(count_step_size, count_size) >= max_count) then
+					count_int_reg <= unsigned(count_int_reg, count_size) + unsigned(count_step_size, count_size) - max_count;
 					carry_out <= '1';
-				elsif (count_int_reg + count_step_size <= max_count) then
-					count_int_reg <= count_int_reg + count_step_size;
+				elsif (count_int_reg + unsigned(count_step_size, count_size) <= max_count) then
+					count_int_reg <= count_int_reg + unsigned(count_step_size, count_size);
 					carry_out <= '0';
 				end if;	
 
 			elsif (direction = '0') then -- Count down
-				if (count_int_reg - count_step_size < 0) then 
-					count_int_reg <= count_int_reg - count_step_size + max_count;
+				if (count_int_reg - unsigned(count_step_size, count_size) < 0) then 
+					count_int_reg <= count_int_reg - unsigned(count_step_size, count_size) + max_count;
 					carry_out <= '1';
-				elsif (count_int_reg - count_step_size >= 0) then
-					count_int_reg <= count_int_reg - count_step_size;
+				elsif (count_int_reg - unsigned(count_step_size, count_size) >= 0) then
+					count_int_reg <= count_int_reg - unsigned(count_step_size, count_size);
 					carry_out <= '0';
 				end if;
 			end if;
 		end if;
 	end process main_count;
 
-	count_out <= std_logic_vector(to_unsigned(count_int_reg, count_out'length));
+	count_out <= std_logic_vector(count_int_reg);
 end arch;
