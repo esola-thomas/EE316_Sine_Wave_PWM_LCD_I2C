@@ -20,9 +20,9 @@ applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 256 160)
+	(rect 16 16 240 128)
 	(text "PWM_File" (rect 5 0 48 12)(font "Arial" ))
-	(text "inst" (rect 8 128 20 140)(font "Arial" ))
+	(text "inst" (rect 8 96 20 108)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -40,38 +40,36 @@ applicable agreement for further details.
 	(port
 		(pt 0 64)
 		(input)
-		(text "Max_Number[n-1..0]" (rect 0 0 82 12)(font "Arial" ))
-		(text "Max_Number[n-1..0]" (rect 21 59 103 71)(font "Arial" ))
+		(text "sram_data[n-1..0]" (rect 0 0 69 12)(font "Arial" ))
+		(text "sram_data[n-1..0]" (rect 21 59 90 71)(font "Arial" ))
 		(line (pt 0 64)(pt 16 64)(line_width 3))
 	)
 	(port
 		(pt 0 80)
 		(input)
-		(text "sram_data[n-1..0]" (rect 0 0 69 12)(font "Arial" ))
-		(text "sram_data[n-1..0]" (rect 21 75 90 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 3))
-	)
-	(port
-		(pt 0 96)
-		(input)
 		(text "enable" (rect 0 0 24 12)(font "Arial" ))
-		(text "enable" (rect 21 91 45 103)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96)(line_width 1))
+		(text "enable" (rect 21 75 45 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 1))
 	)
 	(port
-		(pt 240 32)
+		(pt 224 32)
 		(output)
 		(text "PWM_Output" (rect 0 0 56 12)(font "Arial" ))
-		(text "PWM_Output" (rect 163 27 219 39)(font "Arial" ))
-		(line (pt 240 32)(pt 224 32)(line_width 1))
+		(text "PWM_Output" (rect 147 27 203 39)(font "Arial" ))
+		(line (pt 224 32)(pt 208 32)(line_width 1))
 	)
 	(parameter
 		"N"
 		"16"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"Max_Number"
+		"65534"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 224 128)(line_width 1))
+		(rectangle (rect 16 16 208 96)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 256 -64 356 16))
+	(annotation_block (parameter)(rect 240 -64 340 16))
 )

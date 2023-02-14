@@ -45,6 +45,13 @@ applicable agreement for further details.
 		(line (pt 0 64)(pt 16 64)(line_width 1))
 	)
 	(port
+		(pt 0 80)
+		(input)
+		(text "halt" (rect 0 0 12 12)(font "Arial" ))
+		(text "halt" (rect 21 75 33 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 1))
+	)
+	(port
 		(pt 184 32)
 		(output)
 		(text "i[31..0]" (rect 0 0 24 12)(font "Arial" ))
@@ -87,12 +94,12 @@ applicable agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"bus_size_integer"
-		"4"
+		"32"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"bus_size_decimal"
-		"8"
+		"32"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter

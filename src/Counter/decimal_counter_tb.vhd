@@ -9,12 +9,12 @@ architecture tb of decimal_counter_tb is
 
 component decimal_counter
     generic(
-		count_step_integer 	: integer := 5153; 	-- Whole part of delay 
-		count_step_decimal 	: integer := 9607552;    -- Delay part of delay (.25) <= Based on size
-		count_max_integer 	: integer := 15728640;
-		count_max_decimal	: integer := 10000000;
-        bus_size_integer    : integer := 24;
-        bus_size_decimal    : integer := 24;
+		count_step_integer 	: integer := 2576; 	-- Whole part of delay 
+		count_step_decimal 	: integer := 980378;    -- Delay part of delay (.25) <= Based on size
+		count_max_integer 	: integer := 2147483647;
+		count_max_decimal	: integer := 1000000;
+        bus_size_integer    : integer := 31;
+        bus_size_decimal    : integer := 31;
         count_delay         : integer := 5      -- Delay in clock cycles (delay do count up/down)
 	);
     port(

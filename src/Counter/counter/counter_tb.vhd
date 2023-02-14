@@ -21,13 +21,15 @@ component counter
         direction 	: in std_logic; -- 1 Counts up, 0 counts down
         carry_in	: in std_logic;
         carry_out	: out std_logic := '0'; -- Works for both counting up and conting down
-        count_out 	: out std_logic_vector (count_size-1 downto 0) := (others => '0')
+        count_out 	: out std_logic_vector (count_size-1 downto 0) := (others => '0');
+        MSB_8       : out std_logic_vector (19 downto 0)
     );
 end component;
 
     signal clk, ireset, carry_out, carry_in : std_logic := '0';
     signal direction                        : std_logic := '1';
     signal count_out                        : std_logic_vector (count_out_size-1 downto 0);
+    signal MSB_8                            : std_logic_vector (19 downto 0);
 begin
 
     -- c : counter 
@@ -35,7 +37,7 @@ begin
     -- port map (clk => clk, ireset => ireset, direction => direction, count_out => count_out, carry_out => carry_out);
 
     c : counter generic map (count_size => count_out_size, max_count => 10, count_step_size => 1, count_delay => 2)
-        port map (clk => clk, ireset => ireset, direction => direction, carry_in => carry_in, count_out => count_out, carry_out => carry_out);
+        port map (clk => clk, ireset => ireset, direction => direction, carry_in => carry_in, count_out => count_out, carry_out => carry_out, MSB_8 => MSB_8);
 
     clk <= not clk after 10 ns;
 

@@ -13,11 +13,11 @@ port(
 	clk_en 		: out std_logic;
 	direction	: out std_logic;
 	o_global_reset 	: out std_logic;
-	void			: out std_logic_vector (1 downto 0);
+	MSB_8			: out std_logic_vector (19 downto 0);
 	init_signal     : out std_logic;
 	SRAM_R_W		: out std_logic;
 	SRMA_clk_en		: out std_logic;
-	rst_dec_count	: out std_logic := '0';
+	ROM_adress		: out std_logic_vector(7 downto 0);
 	LCD_line1		: out std_logic_vector (127 downto 0);
 	LCD_line2		: out std_logic_vector (127 downto 0)
 	);
@@ -38,6 +38,42 @@ type init_sequence is (
 	load_SRAM,
 	init_complete
 );
+
+-- Component decimal counter
+ component memory_adress is 
+	generic(
+        address_bus: integer := 8;
+        Max_Adress : std_logic_vector (15 downto 0) := X"00FF"
+    );
+    port(
+        clk     : in std_logic;
+        clk_en  : in std_logic;
+        iReset  : in std_logic;
+        address : out std_logic_vector(address_bus-1 downto 0)
+    );
+ end component;
+
+ component decimal_counter is 
+ generic(
+        max_int_value : unsigned(31 downto 0) := (others => '1');
+        max_deci_value: unsigned(31 downto 0) := (others => '1');
+		count_step_integer 	: integer := 1; 	-- Whole part of delay 
+		count_step_decimal 	: integer := 25;    -- Delay part of delay (.25) <= Based on size
+		count_max_integer 	: integer := 10;
+		count_max_decimal	: integer := 100;
+        bus_size_integer    : integer := 32;
+        bus_size_decimal    : integer := 32;
+        count_delay         : integer := 3      -- Delay in clock cycles (delay do count up/down)
+	);
+    port(
+		clk 	    : in std_logic; 
+		ireset	    : in std_logic; -- Active high
+        direction   : in std_logic;
+        halt        : in std_logic;
+        i,d         : out integer;
+        MSB_8       : out std_logic_vector (19 downto 0) -- <= This is just for this project, as well as lines 63 and 64
+	);
+end component;
 
 signal current_state : system_state := init;
 signal init_state : init_sequence := init_reset;
@@ -70,7 +106,81 @@ signal mode_btn_state2 : std_logic_vector (1 downto 0) := "00";
 -- This might nee to be removed ~~~
 signal toggle_state, toggle_state_reg : std_logic := '0';
 
+-- 8 bit signals from counter
+signal MSB_8_1, MSB_8_2, MSB_8_3, MSB_8_4 : std_logic_vector (19 downto 0) := (others => '0'); 
+signal slow_mem_adress : std_logic_vector (7 downto 0);
 begin
+
+	-- instansiation of decimal counters
+
+		-- Slow decimal counter (1 second delay) for Test Mode
+	secod_counter	: memory_adress 
+		port map (
+        clk    	=> clk,
+        clk_en  => en,
+        iReset  => ireset,
+        address => slow_mem_adress
+    );
+	ROM_adress <= slow_mem_adress;
+	MSB_8_1 (7 downto 0) <= slow_mem_adress;
+	MSB_8_1 (19 downto 8) <= (others => '0');
+
+		-- 60 Mhz decimal counter
+	count_60 		: decimal_counter
+		generic map (
+			max_int_value => x"000000FF", 
+			max_deci_value=> x"000000FF", 
+			count_step_integer=> 1, 
+			count_step_decimal=> 0, 
+			count_max_integer=> 300, 
+			count_max_decimal=> 300, 
+			bus_size_integer=> 31, 
+			bus_size_decimal=> 31, 
+			count_delay => 49999999) 
+		port map (
+			clk 		=> clk, 
+			ireset		=> ireset, 
+			direction	=> '1', 
+			halt		=> halt_clk_en, 
+			MSB_8		=> MSB_8_2);
+
+		-- 120 Mhz decimal counter
+	count_120 		: decimal_counter
+		generic map (
+			max_int_value => x"000000FF", 
+			max_deci_value=> x"000000FF", 
+			count_step_integer=> 1, 
+			count_step_decimal=> 0, 
+			count_max_integer=> 300, 
+			count_max_decimal=> 300, 
+			bus_size_integer=> 31, 
+			bus_size_decimal=> 31, 
+			count_delay => 49999999) 
+		port map (
+			clk 		=> clk, 
+			ireset		=> ireset, 
+			direction	=> '1', 
+			halt		=> halt_clk_en, 
+			MSB_8		=> MSB_8_3);
+
+		-- 1000 Mhz decimal counter
+	count_1000		: decimal_counter
+		generic map (
+			max_int_value => x"000000FF", 
+			max_deci_value=> x"000000FF", 
+			count_step_integer=> 1, 
+			count_step_decimal=> 0, 
+			count_max_integer=> 300, 
+			count_max_decimal=> 300, 
+			bus_size_integer=> 31, 
+			bus_size_decimal=> 31, 
+			count_delay => 49999999) 
+		port map (
+			clk 		=> clk, 
+			ireset		=> ireset, 
+			direction	=> '1', 
+			halt		=> halt_clk_en, 
+			MSB_8		=> MSB_8_4);
 
 	system_start : process (clk)
 	begin
@@ -173,16 +283,17 @@ begin
 					btn_debounce_count <= 0;
 					mode_btn_state <= "00";
 					mode_sw_signal <= '0';
-					PWM_en <= '1';
+					PWM_en <= '0';
 
 				when Test_Mode =>
+					MSB_8 <= MSB_8_1;
+					PWM_en <= '0';
 					SRAM_R_W <= '1'; -- Set SRAM controller to Read Mode
 					SRMA_clk_en <= en;
 					o_global_reset <= '0';
 					clk_en_delay <= 49999999; -- Set counter speed to 1
 					state_message <= "~~~Test__Mode~~~";
-
-					if (sw_mode = '0') then
+					if (sw_mode = '0') then 
 						pwm_or_pause <= '1';
 					elsif (PWM_tog = '0') then
 						pwm_or_pause <= '0';
@@ -211,7 +322,8 @@ begin
 
 				when Pause_Mode => 
 					if (mode_btn_state = "11" and sw_mode = '1') then
-						PWM_en <= '1';
+						MSB_8 <= MSB_8_1;
+						PWM_en <= '0';
 						halt_clk_en <= '1';
 						state_message <= "PAUSE MODE      "; 
 						state_message2 <= "KEY[1] not press"; 
@@ -236,9 +348,13 @@ begin
 
 				when PWM =>
 					if (mode_btn_state = "11" and PWM_tog = '1') then
-						halt_clk_en <= '1';
+						PWM_en <= '1';
+						SRAM_R_W <= '1'; -- Set SRAM controller to Read Mode
+						SRMA_clk_en <= en;
+						o_global_reset <= '0';
+						clk_en_delay <= 1; -- Set counter speed to 1
 						state_message <= "PWM   MODE      "; 
-						state_message2 <= "KEY[1] not press"; 
+						state_message2 <= "KEY[2] not press"; 
 					elsif (PWM_tog = '0' and btn_debounce_count < btn_debounce_delay and mode_btn_state= "11") then -- Swich mode btn is pressed and is being debounced
 						btn_debounce_count <= btn_debounce_count + 1;
 						halt_clk_en <= '1';
@@ -248,7 +364,7 @@ begin
 					elsif (PWM_tog = '0' and mode_btn_state= "01") then -- Btn is pressed and debounced, wait for release
 						btn_debounce_count <= 0;
 						mode_btn_state <= "01"; -- Butn is pressed and debouced
-						state_message2 <= "KEY[1] press&deb"; 
+						state_message2 <= "KEY[2] press&deb"; 
 					elsif (PWM_tog = '1') then
 						mode_btn_state <= "00";
 						mode_sw_signal <= '0';
@@ -315,5 +431,4 @@ begin
 
 	direction <= '1';
 	init_signal <= '0' when (current_state = init) else '1';
-	void <= '1' & mode_sw_signal;
 end;

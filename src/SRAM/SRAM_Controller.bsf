@@ -101,6 +101,13 @@ applicable agreement for further details.
 		(line (pt 256 128)(pt 240 128)(line_width 1))
 	)
 	(port
+		(pt 256 144)
+		(output)
+		(text "SRAM_out[15..0]" (rect 0 0 71 12)(font "Arial" ))
+		(text "SRAM_out[15..0]" (rect 164 139 235 151)(font "Arial" ))
+		(line (pt 256 144)(pt 240 144)(line_width 3))
+	)
+	(port
 		(pt 256 32)
 		(bidir)
 		(text "SRAM_data[15..0]" (rect 0 0 76 12)(font "Arial" ))

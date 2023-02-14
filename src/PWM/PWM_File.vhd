@@ -6,6 +6,7 @@ entity PWM_File is
     generic(
 	 N: integer := 16; 
 	 Max_Number : integer := 65534); -- number of bits of PWM counter
+
     port(
         clk             : in std_logic;
         reset           : in std_logic;

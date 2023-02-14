@@ -13,7 +13,9 @@ entity counter is
 		clk 		: in std_logic; 
 		ireset		: in std_logic;
 		direction 	: in std_logic; -- 1 Counts up, 0 counts down
+		halt		: in std_logic; -- Halt at 1 
 		carry_in	: in std_logic;
+		clear		: in std_logic; -- Clear Counter when 1
 		carry_out	: out std_logic := '0'; -- Works for both counting up and conting down
 		count_out 	: out std_logic_vector (count_size-1 downto 0) := (others => '0')
 	);
@@ -41,7 +43,7 @@ begin
 	end process clk_enabler;
 	
 	main_count : process (clk, en) begin
-		if (ireset = '1') then -- Possible implementation, add if statement to reset to max or min value depending on the direction signal
+		if (ireset = '1' or clear = '1') then -- Possible implementation, add if statement to reset to max or min value depending on the direction signal
 			count_int_reg <= 0;
 			carry_out <= '0';
 		elsif (carry_in = '1' and new_carry_in = '0') then
@@ -51,7 +53,7 @@ begin
 			elsif (direction = '0') then
 				count_int_reg <= count_int_reg - 1;
 			end if;
-		elsif (rising_edge(clk) and en = '1') then
+		elsif (rising_edge(clk) and en = '1' and halt = '0') then
 			new_carry_in <= '0';
 			if (direction = '1') then -- Count up
 				if (count_int_reg + count_step_size >= max_count) then
