@@ -287,7 +287,8 @@ begin
 							init_state <= init_complete; 
 					end case;
 				when global_reset =>
-					state_message <= "~Global Reset   ";
+					state_message <= "~~Initializing~~";
+					-- state_message <= "~Global Reset   ";
 					state_message2 <= "Global Reset    ";
 					init_state <= init_reset;
 					o_global_reset <= '1';
@@ -303,7 +304,6 @@ begin
 					SRMA_clk_en <= en;
 					o_global_reset <= '0';
 					clk_en_delay <= 49999999; -- Set counter speed to 1
-					state_message <= "~~~Test__Mode~~~";
 					if (sw_mode = '0') then 
 						pwm_or_pause <= '1';
 					elsif (PWM_tog = '0') then
@@ -313,6 +313,7 @@ begin
 					if (mode_btn_state = "00" and sw_mode = '1' and PWM_tog = '1') then
 						halt_clk_en <= '0';
 						-- state_message2 <= Test_buf; 
+						state_message <= "~~~Test__Mode~~~";
 						state_message2 <= "KEY[_] NOT press";
 						PWM_en <= '0';
 					elsif ((sw_mode = '0' or PWM_tog = '0') and btn_debounce_count < btn_debounce_delay and mode_btn_state= "00") then -- Swich mode btn is pressed and is being debounced
