@@ -8,7 +8,9 @@ port(
 	clk 	: in std_logic;
 	sw_mode : in std_logic; -- Active low
 	PWM_tog	: in std_logic;
+	PWM_speed_i: in std_logic;
 	iReset 	: in std_logic;
+	SRAM_data : in std_logic_vector (15 downto 0);
 	PWM_en 		: out std_logic;
 	clk_en 		: out std_logic;
 	direction	: out std_logic;
@@ -37,6 +39,12 @@ type init_sequence is (
 	init_reset,
 	load_SRAM,
 	init_complete
+);
+
+type PWM_speeds is (
+	PWM_60,
+	PWM_120,
+	PWM_1000
 );
 
 -- Component decimal counter
@@ -77,6 +85,7 @@ end component;
 
 signal current_state : system_state := init;
 signal init_state : init_sequence := init_reset;
+signal pwm_speed : pwm_speeds := PWM_60;
 
 signal en : std_logic := '0';
 signal halt_clk_en 	: std_logic := '0';
@@ -89,8 +98,9 @@ signal boot_reset	: std_logic := '1';
 signal reset_delay	: std_logic_vector(7 downto 0) := (others => '0');
 
 -- LCD data buffer
-signal state_message : string(1 to 16);
-signal state_message2 : string(1 to 16);
+signal state_message 	: string(1 to 16);
+signal state_message2 	: string(1 to 16);
+signal Test_buf			: string(1 to 16);
 
 -- mode btn debouncer / endge detector registers
 signal mode_sw_signal : std_logic := '0';
@@ -99,6 +109,7 @@ signal btn_debounce_count : integer := 0;
 constant btn_debounce_delay : integer := 49999;
 
 signal pwm_or_pause : std_logic := '0';
+signal pwm_speed_reg : std_logic := '1';
 -- For PWM 
 signal mode_sw_signal2 : std_logic := '0';
 signal mode_btn_state2 : std_logic_vector (1 downto 0) := "00"; 
@@ -128,15 +139,15 @@ begin
 		-- 60 Mhz decimal counter
 	count_60 		: decimal_counter
 		generic map (
-			max_int_value => x"000000FF", 
-			max_deci_value=> x"000000FF", 
-			count_step_integer=> 1, 
-			count_step_decimal=> 0, 
-			count_max_integer=> 300, 
-			count_max_decimal=> 300, 
+			max_int_value => "01111111011111111111111010111110", 
+			max_deci_value=> "00000000000000110011001001001100", 
+			count_step_integer=> 2576, 
+			count_step_decimal=> 980378, 
+			count_max_integer=> 2139095040, 
+			count_max_decimal=> 1000000, 
 			bus_size_integer=> 31, 
 			bus_size_decimal=> 31, 
-			count_delay => 49999999) 
+			count_delay => 0) 
 		port map (
 			clk 		=> clk, 
 			ireset		=> ireset, 
@@ -147,15 +158,15 @@ begin
 		-- 120 Mhz decimal counter
 	count_120 		: decimal_counter
 		generic map (
-			max_int_value => x"000000FF", 
-			max_deci_value=> x"000000FF", 
-			count_step_integer=> 1, 
-			count_step_decimal=> 0, 
-			count_max_integer=> 300, 
-			count_max_decimal=> 300, 
+			max_int_value => "01111111011111111111111010111101", 
+			max_deci_value=> "00000000000000010011011001010100", 
+			count_step_integer=> 5153, 
+			count_step_decimal=> 960755, 
+			count_max_integer=> 2139094718, 
+			count_max_decimal=> 20948, 
 			bus_size_integer=> 31, 
 			bus_size_decimal=> 31, 
-			count_delay => 49999999) 
+			count_delay => 0) 
 		port map (
 			clk 		=> clk, 
 			ireset		=> ireset, 
@@ -166,15 +177,15 @@ begin
 		-- 1000 Mhz decimal counter
 	count_1000		: decimal_counter
 		generic map (
-			max_int_value => x"000000FF", 
-			max_deci_value=> x"000000FF", 
-			count_step_integer=> 1, 
-			count_step_decimal=> 0, 
-			count_max_integer=> 300, 
-			count_max_decimal=> 300, 
+			max_int_value => "01111111011111110110010110111111", 
+			max_deci_value=> "00000000000000000111010100100000", 
+			count_step_integer=> 42949, 
+			count_step_decimal=> 67296, 
+			count_max_integer=> 2139055551, 
+			count_max_decimal=> 29984, 
 			bus_size_integer=> 31, 
 			bus_size_decimal=> 31, 
-			count_delay => 49999999) 
+			count_delay => 0) 
 		port map (
 			clk 		=> clk, 
 			ireset		=> ireset, 
@@ -238,6 +249,7 @@ begin
 
 			case current_state is
 				when init =>
+					PWM_en <= '0';
 					state_message <= "Init SRAM...    ";
 					clk_en_delay <= 100000; -- Load Values to SRAM at a faster Rate
 					case init_state is 
@@ -286,7 +298,6 @@ begin
 					PWM_en <= '0';
 
 				when Test_Mode =>
-					MSB_8 <= MSB_8_1;
 					PWM_en <= '0';
 					SRAM_R_W <= '1'; -- Set SRAM controller to Read Mode
 					SRMA_clk_en <= en;
@@ -301,7 +312,9 @@ begin
 
 					if (mode_btn_state = "00" and sw_mode = '1' and PWM_tog = '1') then
 						halt_clk_en <= '0';
-						state_message2 <= "KEY[1] not press"; 
+						-- state_message2 <= Test_buf; 
+						state_message2 <= "KEY[_] NOT press";
+						PWM_en <= '0';
 					elsif ((sw_mode = '0' or PWM_tog = '0') and btn_debounce_count < btn_debounce_delay and mode_btn_state= "00") then -- Swich mode btn is pressed and is being debounced
 						btn_debounce_count <= btn_debounce_count + 1;
 						halt_clk_en <= '1';
@@ -321,8 +334,8 @@ begin
 					end if;
 
 				when Pause_Mode => 
+					PWM_en <= '0';
 					if (mode_btn_state = "11" and sw_mode = '1') then
-						MSB_8 <= MSB_8_1;
 						PWM_en <= '0';
 						halt_clk_en <= '1';
 						state_message <= "PAUSE MODE      "; 
@@ -347,14 +360,37 @@ begin
 					end if;
 
 				when PWM =>
+					
+					if (PWM_speed_i = '1' and pwm_speed_reg = '0' and pwm_speed = PWM_60) then
+						pwm_speed  <= PWM_120;
+						pwm_speed_reg <= '1';
+					elsif (PWM_speed_i = '1' and pwm_speed_reg = '0' and pwm_speed = PWM_120) then
+						pwm_speed <= PWM_1000;
+						pwm_speed_reg <= '1';
+					elsif (PWM_speed_i = '1' and pwm_speed_reg = '0' and pwm_speed = PWM_1000) then
+						pwm_speed <= PWM_60;
+						pwm_speed_reg <= '1';
+					else
+						pwm_speed_reg <= PWM_speed_i;
+					end if;
+
 					if (mode_btn_state = "11" and PWM_tog = '1') then
+						halt_clk_en <= '0';
 						PWM_en <= '1';
 						SRAM_R_W <= '1'; -- Set SRAM controller to Read Mode
 						SRMA_clk_en <= en;
 						o_global_reset <= '0';
 						clk_en_delay <= 1; -- Set counter speed to 1
 						state_message <= "PWM   MODE      "; 
-						state_message2 <= "KEY[2] not press"; 
+						if (pwm_speed = PWM_60) then
+							state_message2 <= "60Mhz sine wave "; 
+						elsif (pwm_speed = PWM_120) then
+							state_message2 <= "120Mhz sine wave";
+						elsif (pwm_speed = PWM_1000) then
+							state_message2 <= "1000Mhz sineWave";
+						else
+							state_message2 <= "KEY[2] not press";
+						end if;
 					elsif (PWM_tog = '0' and btn_debounce_count < btn_debounce_delay and mode_btn_state= "11") then -- Swich mode btn is pressed and is being debounced
 						btn_debounce_count <= btn_debounce_count + 1;
 						halt_clk_en <= '1';
@@ -429,6 +465,20 @@ begin
 	LCD_line2 (7 downto 0) <= std_logic_vector(to_unsigned(character'pos(state_message2(16)), 8));
 	-- LCD_line2 <= X"41414141414141414141414141414141";
 
+	Test_buf(1) <=  character'val(to_integer(unsigned(MSB_8_1(15 downto 8))));
+	Test_buf(2) <=  character'val(to_integer(unsigned(MSB_8_1(3 downto 0))));
+	Test_buf(3) <=  character'val(20);
+	Test_buf(4) <=  character'val(20);
+	Test_buf(5) <=  character'val(20);
+	Test_buf(6) <=  character'val(to_integer(unsigned(SRAM_data(15 downto 8))));
+	Test_buf(7) <=  character'val(to_integer(unsigned(SRAM_data(7 downto 0))));
+
+
 	direction <= '1';
 	init_signal <= '0' when (current_state = init) else '1';
+
+	MSB_8 <= 	MSB_8_1 when (current_state = Test_Mode) else
+				MSB_8_2 when (pwm_speed = PWM_60 and current_state = PWM) else
+				MSB_8_3 when (pwm_speed = PWM_120 and current_state = PWM) else
+				MSB_8_4 when (pwm_speed = PWM_1000 and current_state = PWM);
 end;

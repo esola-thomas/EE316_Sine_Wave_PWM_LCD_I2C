@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 entity PWM_File is
     generic(
 	 N: integer := 16; 
-	 Max_Number : integer := 65534); -- number of bits of PWM counter
+	 Max_Number : integer := 127); -- number of bits of PWM counter
 
     port(
         clk             : in std_logic;
@@ -19,9 +19,10 @@ end PWM_File;
 
 architecture behavior of PWM_File is
 
-    signal sram_info 		 : unsigned(N - 1 downto 0);
-    signal PWM_COUNTER_MAX  : unsigned(N - 1 downto 0);
-    signal Counter          : unsigned(N - 1 downto 0);
+    signal sram_info 		 : unsigned(N - 1 downto 0) := (others => '0');
+    signal PWM_COUNTER_MAX  : unsigned(N - 1 downto 0) := (others => '0');
+    signal Counter          : unsigned(N - 1 downto 0) := (others => '0');
+    signal truncated_in     : std_logic_vector (7 downto 0);
     
 begin
 
@@ -29,7 +30,7 @@ begin
     process(clk)
     begin
 	 
-	 	sram_info	    <= unsigned(sram_data); 
+	 	-- sram_info	    <= unsigned(sram_data); 
 		PWM_COUNTER_MAX <= to_unsigned(Max_Number, 16);
 
 	
@@ -54,10 +55,15 @@ begin
     
     end process;
     
-    PWM_Output <= '1' when (Counter <= sram_info)
-	 else
-                      '0' when reset = '1' else
-                      '0';
+    truncated_in <= sram_data(N-1 downto n-8);
+
+    PWM_Output <=   '0' when reset = '1' else
+                    '0' when (enable = '0') else
+                    '0' when (std_logic_vector(Counter) > truncated_in) else
+                    '1' when (std_logic_vector(Counter) < truncated_in);
+                    
+                    
+                    
 
 
 end behavior;

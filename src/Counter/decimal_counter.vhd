@@ -83,6 +83,6 @@ begin
     i <= i_reg;
     d <= d_reg;
 
-    MSB_8 (7 downto 0) <= int_count_out (bus_size_integer-2 downto bus_size_integer-9);     -- <= Just for this project
+    MSB_8 (7 downto 0) <= int_count_out (bus_size_integer-1 downto bus_size_integer-8);     -- <= Just for this project
     MSB_8 (19 downto 8) <= (others => '0');                 -- <= Just for this project
 end arch;
